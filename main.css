@@ -5,6 +5,7 @@
     
 }
 
+
 #HowTo {
     padding-top:50px;
     padding-bottom:50px;
@@ -33,4 +34,19 @@
     padding-left: 100px;
     padding-right: 100px;
     background-color: rgb(173, 239, 241);
+}
+
+#Games {
+    padding-top:50px;
+    padding-bottom:50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: rgb(153, 255, 102);
+}
+
+#catch{
+    padding-top: 50px;
+    padding-bottom: 0px;
+    text-align: center;
+    background-color: rgb(102, 102, 153);
 }

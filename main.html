@@ -3,18 +3,46 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>Many Mini Waster</title>
+    <title>Fracker</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" integrity="sha384-cs/chFZiN24E4KMATLdqdvsezGxaGsi4hLGOzlXwp5UZB1LY//20VyM2taTB4QvJ" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous">
+    </script>
     <script src="main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function(){
+        // Add smooth scrolling to all links
+     $("a").on('click', function(event) {
+
+    // Make sure this.hash has a value before overriding default behavior
+    if (this.hash !== "") {
+      // Prevent default anchor click behavior
+      event.preventDefault();
+
+      // Store hash
+      var hash = this.hash;
+
+      // Using jQuery's animate() method to add smooth page scroll
+      // The optional number (800) specifies the number of milliseconds it takes to scroll to the specified area
+      $('html, body').animate({
+        scrollTop: $(hash).offset().top
+      }, 800, function(){
+   
+        // Add hash (#) to URL when done scrolling (default click behavior)
+        window.location.hash = hash;
+      });
+    } // End if
+  });
+});
+    </script>
 </head>
 <body data-spy="scroll" data-target="#nav1" data-offset="50">
     <nav id="nav1" class="navbar fixed-top navbar-expand-sm navbar-dark bg-dark">
-        <a class="navbar-brand" href="#Home">Many Mini Waste</a>
+        <a class="navbar-brand" href="#Home">FoodSavers</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -22,10 +50,9 @@
             <div class="navbar-nav">
                 <a class="nav-item nav-link" href="#HowTo">How to</a>
                 <a class="nav-item nav-link" href="#LogIn">LogIn</a>
+                <a class="nav-item nav-link" href="#Games">Games</a>
                 <a class="nav-item nav-link" href="#Stats">Stats</a>
                 <a class="nav-item nav-link" href="#About">About</a>
-                <a class="nav-item nav-link" href="catch.html">Catch Game</a>
-                <a class="nav-item nav-link" href="snake.html">Snake Game</a>
             </div>
         </div>
     </nav>
@@ -33,12 +60,7 @@
     <div class="container-fluid" id="Home">
         <div class="row">
             <div class="col-sm-12 text-center">
-                <h1 class="display-1">Many Mini Waste</h1>
-                
-            </div>
-            <div class="col-sm-12 text-center">
-                <img src="catch.jpg" class="img-fluid" alt="main image">
-                <h3>Simple Games!<small class="text-muted">Catch and Snake!</small></h3>
+                <img src="logo.png" class="img-fluid" alt="main image">
             </div>   
         </div>
     </div>
@@ -66,8 +88,26 @@
                 <button type="button" class="btn btn-dark btn-lg btn-block">Log In</button>
             </div>
             <div class="col-sm-12 text-center">
-                <h3> <small class="text-muted">Log-In to view scores</small></h3>
+                <h3> <small class="text-muted">Log-In to view My Fridge</small></h3>
             </div>   
+        </div>
+    </div>
+
+    <!--Games-->
+    <div class="container-fluid" id="Games">
+        <div class="row">
+            <div class='col-sm-12 text-center'>
+                <h1 class="text-center display-4">Games</h1>
+            </div>
+
+            <div class="col-sm-12 text-left">
+                <ul>
+                    <li><a class="nav-item nav-link" href="compostMania/catch.html">Compost Mania</a></li>
+                    <li><a class="nav-item nav-link" href="game2/cart.html">Wise Shopping</a></li>
+
+                    <li><a class="nav-item nav-link" href="#Games">Game 3</a></li>
+                </ul>
+            </div>
         </div>
     </div>
     
@@ -84,7 +124,7 @@
                 <button id="checking" type="button" class="btn btn-success">Calculate!</button>
                 <blockquote class="blockquote">
                         <p class="mb-0">It will calculate how much you saved for this week.</p>
-                </blockquote>
+                      </blockquote>
             </div>
         </div>
         <div class="row">
