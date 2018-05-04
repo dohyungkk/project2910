@@ -15,17 +15,6 @@ app.listen(3003, ()=>{
     
 })
 
-var mysql = require('mysql');
-var conn = mysql.createConnection({
-    host : '127.0.0.1',
-    user : 'root',
-    socketPath: '/Applications/mampstack-7.1.17-0/mysql/tmp/mysql.sock',
-    password : 'hendrick3',
-    database : 'o2'
-});
-
-conn.connect();
-
 app.get('/', (req,res)=>{
     res.sendfile('main.html');
 })
@@ -47,7 +36,7 @@ app.post('/login', (req,res)=>{
 
 app.get('/login', (req,res)=>{
     var output=`
-    <h1>Login</h1>
+    <h1>Register User</h1>
     <form action="/login" method="post">
         <p>
             <input type="text" name="userid" placeholder="username">
