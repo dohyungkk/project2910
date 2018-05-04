@@ -30,7 +30,7 @@ app.get('/', (req,res)=>{
     res.sendfile('main.html');
 })
 
-app.post('/login2', (req,res)=>{
+app.post('/login', (req,res)=>{
     var id = req.body.userid;
     var pwd = req.body.password;
 
