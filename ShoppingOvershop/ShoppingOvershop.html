@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Shopping Overshop</title>
+
+        <script type="text/javascript" src="../phaser/dist/phaser.js"></script>
+        
+        <script type="text/javascript" src="phasJavascript/boot.js"></script>
+        <script type="text/javascript" src="phasJavascript/load.js"></script>
+        <script type="text/javascript" src="phasJavascript/mainMenu.js"></script>
+        <script type="text/javascript" src="phasJavascript/play.js"></script>
+        <script type="text/javascript" src="phasJavascript/score.js"></script>
+
+
+    </head>
+    <body>
+        <script>
+            var config = {
+                type: Phaser.AUTO,
+                width: 800,
+                height: 550,
+                loader: {
+                    baseURL: 'assets'
+                },
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        gravity: {y: 100},
+                        debug: false
+                    }
+                },
+                
+                backgroundColor: '#DDDDDD',
+                version: '0.1',
+                scene: [bootScene, loadScene, mainMenuScene, playScene]
+            };
+            var game = new Phaser.Game(config);
+
+        </script>
+
+    </body>
+</html>
