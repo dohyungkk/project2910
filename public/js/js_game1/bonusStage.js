@@ -8,6 +8,7 @@ var bonusStage = new Phaser.Class({
         Phaser.Scene.call(this, {key: 'bonusStage'});
     },
     preload: function() {
+        this.load.audio('bonusMusic', 'image/assets_1/music/bonusMusic.mp3');
     },
     create: function ()
     {
@@ -19,11 +20,20 @@ var bonusStage = new Phaser.Class({
         player.setScale(0.5);
         player.setCollideWorldBounds(true);
         this.physics.add.collider(player, platform);
-        
+        hpImage = this.physics.add.group({
+            key: 'heart',
+            repeat: health-1,
+            setXY: {x: 380, y: 580, stepX: -20}
+        });
+       hpImage.children.iterate(function (child) {
+           child.setScale(0.25);
+           child.setCollideWorldBounds(true);
+       });
+       music = this.sound.add('bonusMusic');
+        music.play();
         potatos = this.time.addEvent({delay: 300, callback: bonusScore, callbackScope: this, repeat: 19});
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
-        hp = this.add.text(16,550,'HP: ' + health, {fontSize: '32px', fill: 'red'});
-        
+        // hp = this.add.text(16,550,'HP: ' + health, {fontSize: '32px', fill: 'red'});
     },
     update: function () {
         this.input.on('pointermove', function (pointer) {
@@ -32,11 +42,13 @@ var bonusStage = new Phaser.Class({
             player.y=515;
             }
         });
+
         this.physics.add.overlap(player, potatos, bonusPoints, null, this);
         this.physics.add.overlap(platform, potatos, bonusCollission, null, this);
         if (potatoNum===0) {
             potatoStage = false;
             potatoNum=20;
+            music.pause();
             this.scene.start('mainScene')   
         }
     }
@@ -58,5 +70,5 @@ function bonusCollission (ground, foodWaste) {
     foodWaste.disableBody(true, true);
     potatoNum--;
     damage = true;
-    hp.setText('HP: ' + health);
+    // hp.setText('HP: ' + health);
 } 

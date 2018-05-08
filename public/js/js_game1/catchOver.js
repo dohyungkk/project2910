@@ -14,11 +14,17 @@ var catchOver = new Phaser.Class({
     {
         this.load.image('gameOver', 'image/assets_1/gameover.png');
         this.load.image('restart', 'image/assets_1/replay.png');
+        this.load.audio('musicOver', 'image/assets_1/music/overMusic.mp3');
         
     },
 
     create: function ()
     {
+        music = this.sound.add('musicOver');
+        music.play();
+        music.once('looped', function(sound) {
+            startstem.call(this, music, 'musicOver');
+        }, this);
         this.add.image(400, 300, 'sky');
         
         platform = this.physics.add.staticImage(192, 600, 'ground');
@@ -39,6 +45,7 @@ var catchOver = new Phaser.Class({
             gameOver = false;
             score=0;
             health=10;
+            music.pause();
         },this);
         
     },

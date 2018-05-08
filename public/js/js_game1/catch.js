@@ -2,11 +2,9 @@ var scoreText;
 var hp;
 var gameOver = false;
 var potatoStage = false;
-//var damage = false;
+var effect;
 var score = 0;
 var health = 10;
-//var order = 0;
-//var hpImage0,hpImage1,hpImage2,hpImage3,hpImage4,hpImage5,hpImage6,hpImage7,hpImage8,hpImage9;
 var drops, bananas, pizzas, potatos, chickens;
 var mainScene = new Phaser.Class({
     
@@ -28,13 +26,22 @@ var mainScene = new Phaser.Class({
         this.load.image('pizza', 'image/assets_1/pizza_slice.png');
         this.load.image('banana', 'image/assets_1/banana_peel.png');
         this.load.image('potato', 'image/assets_1/Potato.png');
-        this.load.image('chicken', 'image/assets_1/drumstick.png')
+        this.load.image('chicken', 'image/assets_1/drumstick.png');
+
+        this.load.audio('mainMusic', 'image/assets_1/music/mainGame.mp3');
+        this.load.audio('soundEffect', 'image/assets_1/music/effect.mp3');
         
     },
     
     //this is initial
     create: function ()
-    {
+    {   
+        music = this.sound.add('mainMusic');
+        music.play();
+        music.once('looped', function(sound) {
+            startstem.call(this, music, 'musicOver');
+        }, this);
+        effect = this.sound.add('soundEffect');
         this.add.image(400, 300, 'sky');
         //this becomes obsatcles(object) from game. It doesn't move
         platform = this.physics.add.staticImage(192, 600, 'ground');
@@ -46,16 +53,17 @@ var mainScene = new Phaser.Class({
         player.setCollideWorldBounds(true);
         //it blocks object to go through static object.
         this.physics.add.collider(player, platform);
-       
-//        hpImage = this.time.addEvent({delay: 0, callback: hpPoint, callbackScope: this, repeat: 3});
-//        hpImage.setScale(0.25);
-//        hpImage.children.iterate(function (child) {
-//            child.setScale(0.25);
-//            child.setCollideWorldBounds(true);
-//        });
-        
+
+        hpImage = this.physics.add.group({
+            key: 'heart',
+            repeat: health-1,
+            setXY: {x: 380, y: 580, stepX: -20}
+        });
+        hpImage.children.iterate(function (child) {
+           child.setScale(0.25);
+        });
         //it loops the dropping item so it can keep dropping.
-        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(5000,10000), callback: bonusOn, callbackScope: this, repeat: 3});
+        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(50000,100000), callback: bonusOn, callbackScope: this, repeat: 3});
 
          //it loops the dropping item so it can keep dropping.
         bananas = this.time.addEvent({delay: Phaser.Math.FloatBetween(500, 3000), callback: onEventbnn, callbackScope: this, loop: true});
@@ -72,8 +80,7 @@ var mainScene = new Phaser.Class({
 
         //add text on the game.
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
-        hp = this.add.text(16,550,'HP: ' + health, {fontSize: '32px', fill: 'red'});
-       
+        // hp = this.add.text(16,550,'HP: ' + health, {fontSize: '32px', fill: 'red'});
     },
     //it is frame. This keep updating status of game
     update: function ()
@@ -81,6 +88,7 @@ var mainScene = new Phaser.Class({
             
         if (gameOver) {
             this.physics.pause();
+            music.pause();
             this.scene.start('catchOver');
             return;
         }
@@ -91,6 +99,7 @@ var mainScene = new Phaser.Class({
             player.y=515;
             }
         });
+        
         //it checks the objects are in same position.
         this.physics.add.overlap(player, drops, collectWaste, null, this);
         this.physics.add.overlap(platform, drops, collision, null, this);
@@ -107,11 +116,10 @@ var mainScene = new Phaser.Class({
         this.physics.add.overlap(player, chickens, collectWaste, null, this);
         this.physics.add.overlap(platform, chickens, collision, null, this);
         if(potatoStage) {
+            music.pause();
             this.scene.start('bonusStage');
         }
-//        if(damage) {
-//            hpImage.destroy();
-//        }
+
     }
 });
 
@@ -126,7 +134,6 @@ function bonusCollect(player, potato) {
 function collectWaste (player, foodWaste) {
     //make it invisible
     foodWaste.disableBody(true, true);
-//    damage = false;
     score += 25;
     scoreText.setText('Score: ' + score);
         
@@ -134,10 +141,18 @@ function collectWaste (player, foodWaste) {
         
 function collision (ground, foodWaste) {
     //make it invisible
+    effect.play();
     foodWaste.disableBody(true, true);
     health--;
-//    damage = true;
-    hp.setText('HP: ' + health);
+    hpImage = this.physics.add.group({
+            key: 'heart',
+            repeat: health-1,
+            setXY: {x: 380, y: 580, stepX: -20}
+    });
+    hpImage.children.iterate(function (child) {
+           child.setScale(0.25);
+    });
+    // hp.setText('HP: ' + health);
     if(health===0) {
         //it stops any movement occurs in system.
         this.physics.pause();
@@ -150,14 +165,18 @@ function onEvent () {
         return;
     }
     drops = this.physics.add.sprite(Phaser.Math.FloatBetween(0, 400), 0, 'foodWaste');
+    if(score%5===0) {
+        drops.body.setGravityY += 100;
+    }
     drops.setScale(0.05);
     drops.setCollideWorldBounds(true);
 }
 function onEventbnn() {
     if (gameOver) {
             return;
-        }
+    }
     bananas = this.physics.add.sprite(Phaser.Math.FloatBetween(0, 400), 0, 'banana');
+    bananas.body.gravity.y = 200;
     bananas.setScale(0.015);
     bananas.setCollideWorldBounds(true);
 }
@@ -167,6 +186,7 @@ function onEventpzz() {
             return;
         }
     pizzas = this.physics.add.sprite(Phaser.Math.FloatBetween(0, 400), 0, 'pizza');
+    pizzas.body.gravity.y = 175;
     pizzas.setScale(0.15);
     pizzas.setCollideWorldBounds(true);
 }
@@ -175,6 +195,7 @@ function bonusOn() {
             return;
         }
     potatos = this.physics.add.sprite(Phaser.Math.FloatBetween(0, 400), 0, 'potato');
+    potatos.body.gravity.y = 300;
     potatos.setScale(0.05);
     potatos.setCollideWorldBounds(true);
 }
@@ -183,6 +204,7 @@ function onEventchk() {
             return;
         }
     chickens = this.physics.add.sprite(Phaser.Math.FloatBetween(0, 400), 0, 'chicken');
+    chickens.body.gravity.y = 300;
     chickens.setScale(0.14);
     chickens.setCollideWorldBounds(true);
 }
