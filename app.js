@@ -14,13 +14,12 @@ app.get('/', (req, res)=>{
     res.render('index');
 });
 
-app.post('/add', bodyParser.json(), (req,res)=>{
-    var a = req.body.a;
-    var b = req.body.b;
+app.get('/game1', (req, res)=>{
+    res.render('game1');
+});
 
-    var sum = a + b;
-
-    res.json(sum);
+app.get('/game2', (req,res)=>{
+    res.render('game2');
 });
 
 app.listen(process.env.PORT || 3003, ()=>{
