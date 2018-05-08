@@ -1,9 +1,12 @@
 <html>
 <head>
     <script src="../phaser/dist/phaser.js"></script>
+    <script src="bonusStage.js"></script>
+    <script src="catchOver.js"></script>
     <script src="catch.js"></script>
     <script src="startCatch.js"></script>
-    <script src="catchOver.js"></script>
+    
+    
 </head>
 <body>
     <script>
@@ -14,11 +17,11 @@
     physics: {
         default: 'arcade',
         arcade: {
-            gravity: {y: 300},
+            gravity: {y: 150},
             debug: false
         }
     },
-    scene: [startCatch, mainScene, catchOver]
+    scene: [startCatch, catchOver, mainScene, bonusStage]
     };
     var game=new Phaser.Game(config);
     

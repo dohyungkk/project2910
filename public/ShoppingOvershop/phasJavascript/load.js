@@ -1,4 +1,5 @@
-
+var musicReference;
+var music;
 
 var loadScene = new Phaser.Class({
     
@@ -46,6 +47,9 @@ var loadScene = new Phaser.Class({
         this.load.image('back', 'buttons/backBtn.png');
         this.load.image('soundOn', 'buttons/soundOn.png');
         this.load.image('soundOff', 'buttons/soundOff.png');
+        //this.load.image('smallPlatform', 'etc/smallInvis.png');
+        this.load.image('cartTop', 'etc/cartTop.png');
+        this.load.image('signOn', 'etc/signOn.png');
 
         //load food files
         this.load.image('fruit', '/foodItems/apple.png');
@@ -61,6 +65,10 @@ var loadScene = new Phaser.Class({
     },
 
     create: function() {
+        //Start playing music
+        menuReference = this;
+        music = this.sound.add('music');
+        music.play();
         this.scene.start('mainMenuScene');
     }
     
