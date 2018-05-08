@@ -50,13 +50,17 @@ var loadScene = new Phaser.Class({
         //this.load.image('smallPlatform', 'etc/smallInvis.png');
         this.load.image('cartTop', 'etc/cartTop.png');
         this.load.image('signOn', 'etc/signOn.png');
+        this.load.image('fruitSign', 'etc/fruitSign.png');
+        this.load.image('dairySign', 'etc/dairySign.png');
+        this.load.image('veggieSign', 'etc/veggieSign.png');
+        this.load.image('meatSign', 'etc/meatSign.png');
+        this.load.image('greenBin', 'etc/greenBin.png');
 
         //load food files
         this.load.image('fruit', '/foodItems/apple.png');
         this.load.image('dairy', '/foodItems/dairy.png');
         this.load.image('meat', '/foodItems/meat.png');
         this.load.image('veggies', '/foodItems/veggie.png');
-    
     
     
     
