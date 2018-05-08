@@ -2,11 +2,9 @@ var scoreText;
 var hp;
 var gameOver = false;
 var potatoStage = false;
-//var damage = false;
 var score = 0;
 var health = 10;
-//var order = 0;
-//var hpImage0,hpImage1,hpImage2,hpImage3,hpImage4,hpImage5,hpImage6,hpImage7,hpImage8,hpImage9;
+//var hpImage;
 var drops, bananas, pizzas, potatos, chickens;
 var mainScene = new Phaser.Class({
     
@@ -109,9 +107,15 @@ var mainScene = new Phaser.Class({
         if(potatoStage) {
             this.scene.start('bonusStage');
         }
-//        if(damage) {
-//            hpImage.destroy();
-//        }
+        hpImage = this.physics.add.group({
+            key: 'heart',
+            repeat: health-1,
+            setXY: {x: 380, y: 580, stepX: 20}
+        });
+        hpImage.children.iterate(function (child) {
+            child.setScale(0.25);
+            child.setCollideWorldBounds(true);
+        });
     }
 });
 
