@@ -6,7 +6,9 @@
 
     <title>FoodSavers</title>
 
+    <link rel="stylesheet" href="path/to/font-awesome/css/font-awesome.min.css">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -15,6 +17,7 @@
     </script>
     <script src="main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    
     <script>
         $(document).ready(function(){
         // Add smooth scrolling to all links || hello kevin edit
@@ -94,20 +97,47 @@
         </div>
     </div>
 
-    <!--Games-->
+    <!--Games list-->
     <div class="container-fluid" id="Games">
         <div class="row">
             <div class='col-sm-12 text-center'>
                 <h1 class="text-center display-4">Games</h1>
             </div>
 
-            <div class="col-sm-12 text-left">
+
+            <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                <ol class="carousel-indicators">
+                    <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                    <li data-target="#myCarousel" data-slide-to="1"></li>
+                </ol>
+                <div class="carousel-inner" role="listbox">
+                    <div class="item active">
+                        <img src="images/groceryshop.png">
+                        <div class="carousel-caption">
+                            <h1>Wise Shopping</h1>
+                            <br>
+                            <button type="button" class="btn btn-default"> Play Wise Shopping!</button>
+                        </div>
+                    </div>
+
+
+
+
+                </div> <!-- End Active -->
+
+                <div class="item">
+                    <img src="images/compost.png">
+
+                </div>
+    
+            </div>
+
+            <!-- <div class="col-sm-12 text-left">
                 <ul>
                     <li><a class="nav-item nav-link" href="game/index.html">Compost Mania</a></li>
                     <li><a class="nav-item nav-link" href="shoppingovershop/shoppingovershop.html">Wise Shopping</a></li>
 
-                    <!-- <li><a class="nav-item nav-link" href="#Games">Game 3</a></li> -->
-                </ul>
+                </ul> -->
             </div>
         </div>
     </div>
