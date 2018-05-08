@@ -1,6 +1,8 @@
 var player;
 var platform;
 var menu;
+var music;
+// var musicIcon;
 var startCatch = new Phaser.Class({
     Extends: Phaser.Scene,
     
@@ -16,6 +18,9 @@ var startCatch = new Phaser.Class({
         this.load.image('sky', 'image/assets_1/sky.png');
         this.load.image('box', 'image/assets_1/greenBin.png');
         this.load.image('start', 'image/assets_1/play.png');
+        // this.load.image('musicOn', 'assets/musicOn.png')
+        // this.load.image('musicOff', 'assets/musicOff.png');
+        this.load.audio('intro', 'image/assets_1/music/mainIntro.mp3');
         
     },
 
@@ -32,10 +37,25 @@ var startCatch = new Phaser.Class({
         
         menu=this.physics.add.staticImage(200, 300, 'start');
         menu.setScale(0.25);
-        this.input.once('pointerdown', function() {
+        this.input.on('pointerdown', function() {
+            music.pause();
             this.scene.start('mainScene');
         },this);
-        
+
+        // musicIcon = this.physics.add.staticImage(350, 20, 'musicOn').setInteractive();
+        // musicIcon.setScale(0.25);
+        // musicIcon.on('pointerdown', function() {
+        //     if(music.isPaused) {
+        //         music.resume();
+        //     } else {
+        //         music.pause();
+        //     }
+        // })
+        music = this.sound.add('intro');
+        music.play();
+        music.once('looped', function(sound) {
+            startstem.call(this, music, 'musicOver');
+        }, this);
     },
 });
     
