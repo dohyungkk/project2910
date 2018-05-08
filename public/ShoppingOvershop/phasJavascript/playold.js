@@ -26,6 +26,12 @@ var dairy;
 var veggie;
 var meat;
 
+//variable to store the invisible platforms to hold the products
+var fruitShelf;
+var dairyShelf;
+var veggieShelf;
+var meatShelf;
+
 //the difficulty level
 var diff;
 var diffTimer;
@@ -51,7 +57,7 @@ var playScene = new Phaser.Class({
 
     preload: function() {
         lose = 0;
-        diff = 1;
+
         score = 0;
 
         numDairy = 0;
@@ -59,17 +65,14 @@ var playScene = new Phaser.Class({
         numVeggies = 0;
         numMeat = 0;
 
-        
         //Numerical value of what you need
         numDairyNeeded = 0;
         numFruitNeeded = 0;
         numVeggiesNeeded = 0;
         numMeatNeeded = 0;
-        
-        genItemNeeded();
 
         //the difficulty level
-        
+        diff = 1;
 
 
         this.add.image(400,500, 'floor');
@@ -77,13 +80,11 @@ var playScene = new Phaser.Class({
         this.add.image(700,500, 'list');
 
         //Generate random number of items needed
-        /*
         numDairyNeeded = Phaser.Math.Between(1,diff);
         numFruitNeeded = Phaser.Math.Between(1,diff);
         numVeggiesNeeded = Phaser.Math.Between(1,diff);
         numMeatNeeded = Phaser.Math.Between(1,diff);
-        */
-        
+
         //Display texts
         scoreText = this.add.text(15,15, "Score: " + score, {
             font: '20px Arial',
@@ -123,9 +124,9 @@ var playScene = new Phaser.Class({
         dairyPlatform = this.physics.add.staticGroup();
         dairyPlatform.create(100, 375, 'smallPlatform');
         veggiePlatform = this.physics.add.staticGroup();
-        veggiePlatform.create(700, 175, 'smallPlatform');
+        veggiePlatform.create(200, 175, 'smallPlatform');
         meatPlatform = this.physics.add.staticGroup();
-        meatPlatform.create(700, 375, 'smallPlatform');
+        meatPlatform.create(200, 375, 'smallPlatform');
         
 
 
@@ -142,7 +143,10 @@ var playScene = new Phaser.Class({
         this.add.sprite(400,440, 'cartTop');
 
         //Spawns the items
-        fullSpawner();
+        spawner(fruit, 'fruit', fruitText);
+        spawner(dairy, 'dairy', dairyText);
+        spawner(veggie, 'veggies', veggiesText);
+        spawner(meat, 'meat', meatText);
 
     },
 
@@ -151,7 +155,23 @@ var playScene = new Phaser.Class({
         //Check if you meet the requirements
         if(numDairy == numDairyNeeded && numFruit == numFruitNeeded &&
             numVeggies == numVeggiesNeeded && numMeat == numMeatNeeded) {
-            
+            /*
+            diff = diff + 1;
+            numDairyNeeded = Phaser.Math.Between(1,diff);
+            numFruitNeeded = Phaser.Math.Between(1,diff);
+            numVeggiesNeeded = Phaser.Math.Between(1,diff);
+            numMeatNeeded = Phaser.Math.Between(1,diff);
+
+            numDairy = 0;
+            numFruit = 0;
+            numVeggies = 0;
+            numMeat = 0;
+
+            dairyText.setText("Dairy: " + numDairy + " / " + numDairyNeeded);
+            fruitText.setText("Fruit: " + numFruit + " / " + numFruitNeeded);
+            veggiesText.setText("Veggies: " + numVeggies + " / " + numVeggiesNeeded);
+            meatText.setText("Meat: " + numMeat + " / " + numMeatNeeded);
+            */
             toNextLevel();
 
             //Reset Timer
@@ -163,25 +183,18 @@ var playScene = new Phaser.Class({
 
 
             }, callbackScope: this, loop: true});
-            
-            //delete old children
-            deleteAllChilds();
-            fullSpawner();
+
+            spawner(fruit, 'fruit', fruitText, numFruit, numFruitNeeded);
+            spawner(dairy, 'dairy', dairyText, numDairy, numDairyNeeded);
+            spawner(veggie, 'veggies', veggiesText, numVeggies, numVeggiesNeeded);
+            spawner(meat, 'meat', meatText, numMeat, numMeatNeeded);
         }
         
-
-        if((numDairy < numDairyNeeded || numFruit < numFruitNeeded||
-            numVeggies < numVeggiesNeeded || numMeat < numMeatNeeded) && lose == 0) {
-            gameOver();
-        }
-
-        /*
         //Automatically lose if you get one extra of an item
         if((numDairy > numDairyNeeded || numFruit > numFruitNeeded ||
             numVeggies > numVeggiesNeeded || numMeat > numMeatNeeded) && lose == 0) {
             gameOver(); 
         }
-        */
 
         //update the time left
         diffTimeText.setText("Time Left: " + (60 - Math.floor(60 * diffTimer.getProgress())));
@@ -191,81 +204,30 @@ var playScene = new Phaser.Class({
 
 });
 
-/*generates a random amount of items needed and number amount of items */
-function genItemNeeded() {
-    numFruitNeeded = Phaser.Math.Between(1,diff);
-    numDairyNeeded = Phaser.Math.Between(1,diff);
-    numVeggiesNeeded = Phaser.Math.Between(1,diff);
-    numMeatNeeded = Phaser.Math.Between(1,diff);
-    
-    numFruit = Phaser.Math.Between(2,diff*1.5);
-    numDairy = Phaser.Math.Between(2,diff*1.5);
-    numVeggies = Phaser.Math.Between(2,diff*1.5);
-    numMeat =  Phaser.Math.Between(2,diff*1.5);
-    
-}
 
-function fullSpawner() {
-    spawner(fruit, 'fruit', fruitText, numFruit);
-    spawner(dairy, 'dairy', dairyText, numDairy);
-    spawner(veggie, 'veggies', veggiesText, numVeggies);
-    spawner(meat, 'meat', meatText, numMeat);
-    addItemColliders();
-}
-
-//Adds 
-function addItemColliders() {
-    reference.physics.add.collider(fruit, fruit);
-    reference.physics.add.collider(fruit, dairy);
-    reference.physics.add.collider(fruit, veggie);
-    reference.physics.add.collider(fruit, meat);
-
-    reference.physics.add.collider(dairy, dairy);
-    reference.physics.add.collider(dairy, veggie);
-    reference.physics.add.collider(dairy, meat);
-    
-    reference.physics.add.collider(veggie, veggie);
-    reference.physics.add.collider(veggie, meat);
-
-    reference.physics.add.collider(meat, meat);
-
-    //Adding specific colliders for moving to the shelves and places it on the shelf and is unmovable again
-    reference.physics.add.overlap(fruit, fruitPlatform, function(fruit){
-        fruit.disableBody(true, true);
-        numFruit--;
-        fruitText.setText("Fruit: " + numFruit + " / " + numFruitNeeded);
-        reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(150,160), 'fruit');
-    }, null, reference);
-
-    reference.physics.add.overlap(dairy, dairyPlatform, function(dairy){
-        dairy.disableBody(true, true);
-        numDairy--;
-        dairyText.setText("Dairy: " + numDairy + " / " + numDairyNeeded);
-        reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(340,355), 'dairy');
-    }, null, reference);
-
-    reference.physics.add.overlap(veggie, veggiePlatform, function(veggie){
-        veggie.disableBody(true, true);
-        numVeggies--;
-        veggiesText.setText("Veggies: " + numVeggies + " / " + numVeggiesNeeded);
-        reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(100,150), 'veggies');
-    }, null, reference);
-
-    reference.physics.add.overlap(meat, meatPlatform, function(meat){
-        meat.disableBody(true, true);
-        numMeat--;
-        meatText.setText("Meat: " + numMeat + " / " + numMeatNeeded);
-        reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(350,375), 'meat');
-    }, null, reference);
-}
-
-//Function to spawn an item
-function spawner(toSpawn, key, textChange, numOfItems) {
-
-    toSpawn = reference.physics.add.group();
-    for(i = 0; i < numOfItems; i++) {
-        toSpawn.create(Phaser.Math.Between(300,500), Phaser.Math.Between(0,375), key);
+//Function to spawn the items
+function spawner(toSpawn, key, textChange) {
+    var xPos;
+    switch(key) {
+        case 'fruit':
+            xPos = 100;
+            break;
+        case 'dairy':
+            xPos = 100;
+            break;
+        case 'veggies':
+            xPos = 200;
+            break;
+        default: //for meat
+            xPos = 200;
+            break;
     }
+
+    toSpawn = reference.physics.add.group({
+        key: key,
+        repeat: numFruitNeeded * diff - 1,
+        setXY: {x:xPos, y:0}
+    });      
 
     toSpawn.children.iterate(function(child) {
         child.setCollideWorldBounds(true);
@@ -286,7 +248,6 @@ function spawner(toSpawn, key, textChange, numOfItems) {
     });
 
     //Adds the check if it touches the cart
-    /*
     reference.physics.add.collider(toSpawn, cart, function(toSpawn) {
         var have;
         var need;
@@ -317,27 +278,8 @@ function spawner(toSpawn, key, textChange, numOfItems) {
         score++;
         scoreText.setText('Score: ' + score);
     }, null, reference);
-    */
 
-    //Setting the items to the toSpawn it corresponds to to setup for collisions
-    switch(key) {
-        case 'fruit':
-            fruit = toSpawn;
-            break;
-        case 'dairy':
-            dairy = toSpawn;
-            break;
-        case 'veggies':
-            veggie = toSpawn;
-            break;
-        default: //for meat
-            meat = toSpawn;
-    }
-
-    //Adding basic colliders
-    reference.physics.add.collider(toSpawn, cart);
-    //reference.physics.add.collider(toSpawn, toSpawn);
-    
+    //reference.physics.add.collider(toSpawn, cart);
 
     switch(key) {
         case 'fruit':
@@ -351,21 +293,10 @@ function spawner(toSpawn, key, textChange, numOfItems) {
             break;
         default: //for meat
             reference.physics.add.collider(toSpawn, meatPlatform);
+
     }
 }
 
-function deleteAllChilds() {
-    deleteChild(fruit);
-    deleteChild(dairy);
-    deleteChild(veggie);
-    deleteChild(meat);
-}
-
-function deleteChild(toDelete) {
-    toDelete.children.iterate(function(child) {
-        child.disableBody(true,true);
-    });
-}
 
 function gameOver() {
     lose = 1;
@@ -427,7 +358,15 @@ function gameOver() {
 
 function toNextLevel() {
     diff = diff + 1;
-    genItemNeeded();
+    numDairyNeeded = Phaser.Math.Between(1,diff);
+    numFruitNeeded = Phaser.Math.Between(1,diff);
+    numVeggiesNeeded = Phaser.Math.Between(1,diff);
+    numMeatNeeded = Phaser.Math.Between(1,diff);
+
+    numDairy = 0;
+    numFruit = 0;
+    numVeggies = 0;
+    numMeat = 0;
 
     dairyText.setText("Dairy: " + numDairy + " / " + numDairyNeeded);
     fruitText.setText("Fruit: " + numFruit + " / " + numFruitNeeded);

@@ -1,5 +1,9 @@
 var mainMenuSwitch = 0;
-var music;
+
+var eeSign1 = 0;
+var eeSign2 = 0;
+var eeSign3 = 0;
+var eeSign4 = 0;
 
 var mainMenuScene = new Phaser.Class({
 
@@ -12,11 +16,18 @@ var mainMenuScene = new Phaser.Class({
     },
 
     preload: function() {
-        
+        eeSign1 = 0;
+        eeSign2 = 0;
+        eeSign3 = 0;
+        eeSign4 = 0;
     },
 
     create: function() {
-        music = game.sound.play('music');
+        /*
+        menuReference = this;
+        music = this.sound.add('music');
+        music.play();
+        */
         this.add.image(400,300, 'mainMenuScreen');
         
         //Adding version number
@@ -24,6 +35,16 @@ var mainMenuScene = new Phaser.Class({
         text.setText(['Version: ' + game.config.gameVersion]);
 
         
+        //putting the lights  on the signs
+        sign1 = this.add.sprite(50,100, 'signOn').setInteractive();
+        sign2 = this.add.sprite(250,100, 'signOn').setInteractive();
+        sign3 = this.add.sprite(525, 90, 'signOn').setInteractive();
+        sign4 = this.add.sprite(725,90, 'signOn').setInteractive();
+
+        
+
+
+
 
         //Adding invisible platform so the logo doesnt bounce to the bottom and cover buttons
         invisiPlatform = this.physics.add.staticGroup();
@@ -78,6 +99,8 @@ var mainMenuScene = new Phaser.Class({
             this.setTint(0xCCCCCC);
         });
 
+        //Making the pause/resume music button
+
         var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();
         soundBtn.on('pointerover', function() {
             this.setTint(0xCCCCCC);
@@ -87,11 +110,16 @@ var mainMenuScene = new Phaser.Class({
         });
         soundBtn.on('pointerdown', function() {
             this.setTint(0x999999);
-            this.loadTexture('soundOff');
+            if(music.isPaused) { //resume music
+                music.resume();
+            } else if(music.isPlaying){ //pause music
+                music.pause();
+            }
         });
         soundBtn.on('pointerup', function() {
             this.setTint(0xCCCCCC);
         });
+
     },
 
     update: function() {
