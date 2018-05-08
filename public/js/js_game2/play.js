@@ -33,9 +33,12 @@ var diffTimeText;
 var diffText;
 
 var lose;
+var losetype;
 
 var reference;
 var cart;
+
+var easterEgg
 
 var playScene = new Phaser.Class({
     
@@ -51,6 +54,7 @@ var playScene = new Phaser.Class({
 
     preload: function() {
         lose = 0;
+        losetype = 0;
         diff = 1;
         score = 0;
 
@@ -66,23 +70,12 @@ var playScene = new Phaser.Class({
         numVeggiesNeeded = 0;
         numMeatNeeded = 0;
         
+        //Randomizes the amount of things you need
         genItemNeeded();
-
-        //the difficulty level
-        
-
 
         this.add.image(400,500, 'floor');
         this.add.image(400,200, 'shelf');
         this.add.image(700,500, 'list');
-
-        //Generate random number of items needed
-        /*
-        numDairyNeeded = Phaser.Math.Between(1,diff);
-        numFruitNeeded = Phaser.Math.Between(1,diff);
-        numVeggiesNeeded = Phaser.Math.Between(1,diff);
-        numMeatNeeded = Phaser.Math.Between(1,diff);
-        */
         
         //Display texts
         scoreText = this.add.text(15,15, "Score: " + score, {
@@ -119,20 +112,21 @@ var playScene = new Phaser.Class({
 
         //Making the invisble shelves
         fruitPlatform = this.physics.add.staticGroup();
-        fruitPlatform.create(100, 175, 'smallPlatform');
+        fruitPlatform.create(100, 150, 'fruitSign');
         dairyPlatform = this.physics.add.staticGroup();
-        dairyPlatform.create(100, 375, 'smallPlatform');
+        dairyPlatform.create(100, 350, 'dairySign');
         veggiePlatform = this.physics.add.staticGroup();
-        veggiePlatform.create(700, 175, 'smallPlatform');
+        veggiePlatform.create(700, 150, 'veggieSign');
         meatPlatform = this.physics.add.staticGroup();
-        meatPlatform.create(700, 375, 'smallPlatform');
+        meatPlatform.create(700, 350, 'meatSign');
         
 
 
         //makes the first timer
         diffTimeText = this.add.text(15, 40, "Time Left: ");
         diffTimer = this.time.addEvent({delay: 60000, callback: function() {
-            gameOver();
+            losetype = 0;
+            gameOver(1);
 
         }, callbackScope: this, loop: true});
 
@@ -144,11 +138,18 @@ var playScene = new Phaser.Class({
         //Spawns the items
         fullSpawner();
 
+        //one of the easter eggs to display a green bin
+        if(eeSign1 == 1 && eeSign2 == 1
+        && eeSign3 == 1 && eeSign4 == 1) {
+            easterEgg = this.add.sprite(100,500, 'greenBin').setScale(0.5);
+        }
+
+
     },
 
     update: function() {
 
-        //Check if you meet the requirements
+        //Check if you meet the requirements to go to the next level
         if(numDairy == numDairyNeeded && numFruit == numFruitNeeded &&
             numVeggies == numVeggiesNeeded && numMeat == numMeatNeeded) {
             
@@ -158,53 +159,55 @@ var playScene = new Phaser.Class({
             diffText.setText("Difficulty Level: " + diff);
             diffTimer.remove(false);
             diffTimer = this.time.addEvent({delay: 60000, callback: function() { //Game overif you run out of time
-                //insert gameover here
-                gameOver();
+                losetype = 0;
+                gameOver(1);
 
 
             }, callbackScope: this, loop: true});
             
-            //delete old children
+            //delete old children (removes old items before the next level)
             deleteAllChilds();
             fullSpawner();
         }
         
-
+        //Lose if you dont have enough in the cart
         if((numDairy < numDairyNeeded || numFruit < numFruitNeeded||
             numVeggies < numVeggiesNeeded || numMeat < numMeatNeeded) && lose == 0) {
-            gameOver();
+            losetype = 1;
+            gameOver(0);
         }
 
-        /*
-        //Automatically lose if you get one extra of an item
-        if((numDairy > numDairyNeeded || numFruit > numFruitNeeded ||
-            numVeggies > numVeggiesNeeded || numMeat > numMeatNeeded) && lose == 0) {
-            gameOver(); 
-        }
-        */
-
-        //update the time left
+        //update time left
         diffTimeText.setText("Time Left: " + (60 - Math.floor(60 * diffTimer.getProgress())));
+
+
+        if(eeSign1 == 1 && eeSign2 == 1
+        && eeSign3 == 1 && eeSign4 == 1) {
+            easterEgg.rotation += 0.05;
+            Phaser.Actions.Rotate(fruit.getChildren(), 0.01);
+            Phaser.Actions.Rotate(dairy.getChildren(), 0.02);
+            Phaser.Actions.Rotate(veggie.getChildren(), 0.03);
+            Phaser.Actions.Rotate(meat.getChildren(), 0.04);
+            
+        }    
     }
-
-    
-
 });
 
 /*generates a random amount of items needed and number amount of items */
 function genItemNeeded() {
-    numFruitNeeded = Phaser.Math.Between(1,diff);
-    numDairyNeeded = Phaser.Math.Between(1,diff);
-    numVeggiesNeeded = Phaser.Math.Between(1,diff);
-    numMeatNeeded = Phaser.Math.Between(1,diff);
+    numFruitNeeded = Math.floor(Phaser.Math.Between(1,diff));
+    numDairyNeeded = Math.floor(Phaser.Math.Between(1,diff));
+    numVeggiesNeeded = Math.floor(Phaser.Math.Between(1,diff));
+    numMeatNeeded = Math.floor(Phaser.Math.Between(1,diff));
     
-    numFruit = Phaser.Math.Between(2,diff*1.5);
-    numDairy = Phaser.Math.Between(2,diff*1.5);
-    numVeggies = Phaser.Math.Between(2,diff*1.5);
-    numMeat =  Phaser.Math.Between(2,diff*1.5);
+    numFruit = Math.floor(Phaser.Math.Between(numFruitNeeded + 1,diff*2));
+    numDairy = Math.floor(Phaser.Math.Between(numDairyNeeded + 1,diff*2));
+    numVeggies = Math.floor(Phaser.Math.Between(numVeggiesNeeded + 1,diff*2));
+    numMeat =  Math.floor(Phaser.Math.Between(numMeatNeeded + 1,diff*2));
     
 }
 
+//Used to spawn all 4 types and give them their colliders
 function fullSpawner() {
     spawner(fruit, 'fruit', fruitText, numFruit);
     spawner(dairy, 'dairy', dairyText, numDairy);
@@ -213,7 +216,7 @@ function fullSpawner() {
     addItemColliders();
 }
 
-//Adds 
+//Adds the colliders (needs to be used after spawning all 4 types)
 function addItemColliders() {
     reference.physics.add.collider(fruit, fruit);
     reference.physics.add.collider(fruit, dairy);
@@ -233,28 +236,36 @@ function addItemColliders() {
     reference.physics.add.overlap(fruit, fruitPlatform, function(fruit){
         fruit.disableBody(true, true);
         numFruit--;
+        score++;
         fruitText.setText("Fruit: " + numFruit + " / " + numFruitNeeded);
+        scoreText.setText("Score: " + score);
         reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(150,160), 'fruit');
     }, null, reference);
 
     reference.physics.add.overlap(dairy, dairyPlatform, function(dairy){
         dairy.disableBody(true, true);
         numDairy--;
+        score++;
         dairyText.setText("Dairy: " + numDairy + " / " + numDairyNeeded);
+        scoreText.setText("Score: " + score);
         reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(340,355), 'dairy');
     }, null, reference);
 
     reference.physics.add.overlap(veggie, veggiePlatform, function(veggie){
         veggie.disableBody(true, true);
         numVeggies--;
+        score++;
         veggiesText.setText("Veggies: " + numVeggies + " / " + numVeggiesNeeded);
+        scoreText.setText("Score: " + score);
         reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(100,150), 'veggies');
     }, null, reference);
 
     reference.physics.add.overlap(meat, meatPlatform, function(meat){
         meat.disableBody(true, true);
         numMeat--;
+        score++;
         meatText.setText("Meat: " + numMeat + " / " + numMeatNeeded);
+        scoreText.setText("Score: " + score);
         reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(350,375), 'meat');
     }, null, reference);
 }
@@ -269,6 +280,7 @@ function spawner(toSpawn, key, textChange, numOfItems) {
 
     toSpawn.children.iterate(function(child) {
         child.setCollideWorldBounds(true);
+        child.setBounce(0.5);
         child.setInteractive();
         child.on('pointerover', function() {
             this.setTint(0xAAAAAA);
@@ -282,42 +294,7 @@ function spawner(toSpawn, key, textChange, numOfItems) {
             gameObject.x = dragX;
             gameObject.y = dragY;
         });
-
     });
-
-    //Adds the check if it touches the cart
-    /*
-    reference.physics.add.collider(toSpawn, cart, function(toSpawn) {
-        var have;
-        var need;
-        switch(key) {
-            case 'fruit':
-                numFruit++;
-                have = numFruit;
-                need = numFruitNeeded;
-                break;
-            case 'dairy':
-                numDairy++;
-                have = numDairy;
-                need = numDairyNeeded;
-                break;
-            case 'veggies':
-                numVeggies++;
-                have = numVeggies;
-                need = numVeggiesNeeded;
-                break;
-            default: //for meat
-                numMeat++;
-                have = numMeat;
-                need = numMeatNeeded;
-        }
-        textChange.setText(key.substr(0,1).toUpperCase() + key.substr(1) + ": " + have + " / " + need);
-        toSpawn.disableBody(true,true);
-        
-        score++;
-        scoreText.setText('Score: ' + score);
-    }, null, reference);
-    */
 
     //Setting the items to the toSpawn it corresponds to to setup for collisions
     switch(key) {
@@ -334,11 +311,10 @@ function spawner(toSpawn, key, textChange, numOfItems) {
             meat = toSpawn;
     }
 
-    //Adding basic colliders
+    //Adding default collider for all of them to collide with the cart
     reference.physics.add.collider(toSpawn, cart);
-    //reference.physics.add.collider(toSpawn, toSpawn);
-    
 
+    //Adding collider for it to collide with it's corresponding platform
     switch(key) {
         case 'fruit':
             reference.physics.add.collider(toSpawn, fruitPlatform);
@@ -354,6 +330,7 @@ function spawner(toSpawn, key, textChange, numOfItems) {
     }
 }
 
+//Deletes all of the groups' children
 function deleteAllChilds() {
     deleteChild(fruit);
     deleteChild(dairy);
@@ -361,13 +338,15 @@ function deleteAllChilds() {
     deleteChild(meat);
 }
 
+//Deletes the children of a group (eg. removes all the draggable veggie groups)
 function deleteChild(toDelete) {
     toDelete.children.iterate(function(child) {
         child.disableBody(true,true);
     });
 }
 
-function gameOver() {
+//Displays the gameover message with the chance to restart or go back to the start screen
+function gameOver(type) {
     lose = 1;
     diffTimer.remove(false);
     reference.physics.pause();
@@ -377,15 +356,18 @@ function gameOver() {
         fill: '#ffffff'
     });
 
-    reference.add.text(60, 200, 'You bought too much food and it became rotten',{
+    if(type == 0) {
+        reference.add.text(60, 200, 'You didn\'t buy enough food on the shopping list.',{
         font: '30px Arial',
         fill: '#FFFFFF'
-    });
-    reference.add.text(60,230,'because you didn\'t use it all.', {
+        });
+    } else {
+        reference.add.text(60,200,'You bought too much food.', {
         font: '30px Arial',
         fill: '#ffffff'
-    });
-
+        });
+    }
+    
     reference.add.text(300, 300, 'Score: ' + score, {
         font: '30px Arial',
         fill: '#ffffff'
@@ -425,6 +407,7 @@ function gameOver() {
 
 }
 
+//Used to increase the difficulty and adjust text accordingly when increasing the level
 function toNextLevel() {
     diff = diff + 1;
     genItemNeeded();

@@ -1,9 +1,9 @@
 var mainMenuSwitch = 0;
 
-var eeSign1 = 0;
-var eeSign2 = 0;
-var eeSign3 = 0;
-var eeSign4 = 0;
+var eeSign1;
+var eeSign2;
+var eeSign3;
+var eeSign4;
 
 var mainMenuScene = new Phaser.Class({
 
@@ -23,11 +23,7 @@ var mainMenuScene = new Phaser.Class({
     },
 
     create: function() {
-        /*
-        menuReference = this;
-        music = this.sound.add('music');
-        music.play();
-        */
+
         this.add.image(400,300, 'mainMenuScreen');
         
         //Adding version number
@@ -41,7 +37,23 @@ var mainMenuScene = new Phaser.Class({
         sign3 = this.add.sprite(525, 90, 'signOn').setInteractive();
         sign4 = this.add.sprite(725,90, 'signOn').setInteractive();
 
-        
+        //Adding events to turn off the signs and turn on a hidden variable for the easter egg
+        sign1.on('pointerdown', function() {
+            eeSign1 = 1;
+            sign1.setTint(0x999999);
+        })
+        sign2.on('pointerdown', function() {
+            eeSign2 = 1;
+            sign2.setTint(0x999999);
+        })
+        sign3.on('pointerdown', function() {
+            eeSign3 = 1;
+            sign3.setTint(0x999999);
+        })
+        sign4.on('pointerdown', function() {
+            eeSign4 = 1;
+            sign4.setTint(0x999999);
+        })
 
 
 
