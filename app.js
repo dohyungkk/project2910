@@ -22,6 +22,10 @@ app.get('/game2', (req,res)=>{
     res.render('game2');
 });
 
+app.get('/login', (req, res)=>{
+	res.render('login');
+})
+
 app.listen(process.env.PORT || 3003, ()=>{
     console.log('Connected 3003 port!!');
 })
