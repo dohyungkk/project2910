@@ -176,8 +176,6 @@ var playScene = new Phaser.Class({
             losetype = 1;
             gameOver(0);
         }
-
-        //update time left
         diffTimeText.setText("Time Left: " + (60 - Math.floor(60 * diffTimer.getProgress())));
 
 
@@ -351,7 +349,7 @@ function gameOver(type) {
     diffTimer.remove(false);
     reference.physics.pause();
     reference.add.image(400,275, 'gameover');
-    reference.add.text(300, 90, 'Game Over',{
+    reference.add.text(300, 90, 'Game Over' + type,{
         font: '40px Arial',
         fill: '#ffffff'
     });
