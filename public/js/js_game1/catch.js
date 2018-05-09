@@ -1,5 +1,4 @@
 var scoreText;
-var hp;
 var gameOver = false;
 var potatoStage = false;
 var effect;
@@ -20,39 +19,19 @@ var mainScene = new Phaser.Class({
     
     preload: function ()
     {
-        //set images that will be using
-        this.load.image('foodWaste', 'image/assets_1/mold_cheese.png');
-        this.load.image('heart', 'image/assets_1/heart.png');
-        this.load.image('pizza', 'image/assets_1/pizza_slice.png');
-        this.load.image('banana', 'image/assets_1/banana_peel.png');
-        this.load.image('potato', 'image/assets_1/Potato.png');
-        this.load.image('chicken', 'image/assets_1/drumstick.png');
-
-        this.load.audio('mainMusic', 'image/assets_1/music/mainGame.mp3');
-        this.load.audio('soundEffect', 'image/assets_1/music/effect.mp3');
-        
     },
     
     //this is initial
     create: function ()
     {   
+        this.scene.launch('backgroundScene');
+
         music = this.sound.add('mainMusic');
         music.play();
         music.once('looped', function(sound) {
             startstem.call(this, music, 'musicOver');
         }, this);
         effect = this.sound.add('soundEffect');
-        this.add.image(400, 300, 'sky');
-        //this becomes obsatcles(object) from game. It doesn't move
-        platform = this.physics.add.staticImage(192, 600, 'ground');
-        
-        //it gives movement and rule.
-        player = this.physics.add.sprite(200, 450, 'box');
-        player.setScale(0.5);
-        //it blocks object to go out of canvas.
-        player.setCollideWorldBounds(true);
-        //it blocks object to go through static object.
-        this.physics.add.collider(player, platform);
 
         hpImage = this.physics.add.group({
             key: 'heart',
@@ -63,7 +42,7 @@ var mainScene = new Phaser.Class({
            child.setScale(0.25);
         });
         //it loops the dropping item so it can keep dropping.
-        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(50000,100000), callback: bonusOn, callbackScope: this, repeat: 3});
+        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(30000,100000), callback: bonusOn, callbackScope: this, repeat: 3});
 
          //it loops the dropping item so it can keep dropping.
         bananas = this.time.addEvent({delay: Phaser.Math.FloatBetween(500, 3000), callback: onEventbnn, callbackScope: this, loop: true});
@@ -80,7 +59,7 @@ var mainScene = new Phaser.Class({
 
         //add text on the game.
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
-        // hp = this.add.text(16,550,'HP: ' + health, {fontSize: '32px', fill: 'red'});
+
     },
     //it is frame. This keep updating status of game
     update: function ()
@@ -152,7 +131,6 @@ function collision (ground, foodWaste) {
     hpImage.children.iterate(function (child) {
            child.setScale(0.25);
     });
-    // hp.setText('HP: ' + health);
     if(health===0) {
         //it stops any movement occurs in system.
         this.physics.pause();
