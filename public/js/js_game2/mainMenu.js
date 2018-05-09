@@ -16,10 +16,14 @@ var mainMenuScene = new Phaser.Class({
     },
 
     preload: function() {
+        eemusic.pause();
+        music.resume();
+
         eeSign1 = 0;
         eeSign2 = 0;
         eeSign3 = 0;
         eeSign4 = 0;
+
     },
 
     create: function() {
@@ -138,6 +142,10 @@ var mainMenuScene = new Phaser.Class({
         //switch scene to the game if it is 1
         if(mainMenuSwitch === 1) {
             mainMenuSwitch = 0;
+            if(eeSign1 == 1 && eeSign2 == 1 & eeSign3 == 1 && eeSign4 == 1) {
+                music.pause();
+                eemusic.resume();
+            }
             this.scene.start('playScene');
         }
     }

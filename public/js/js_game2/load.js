@@ -1,5 +1,6 @@
 var musicReference;
 var music;
+var eemusic;
 
 var loadScene = new Phaser.Class({
     
@@ -26,6 +27,7 @@ var loadScene = new Phaser.Class({
 
         //load most used files
         this.load.audio('music', 'audio/Splashing_Around.mp3');
+        this.load.audio('rickroll', 'audio/rickroll.mp3');
         this.load.image('invisiPlatform', 'etc/invisibleLine.png')
         
     
@@ -66,6 +68,7 @@ var loadScene = new Phaser.Class({
     
     
     
+    
     },
 
     create: function() {
@@ -73,6 +76,9 @@ var loadScene = new Phaser.Class({
         menuReference = this;
         music = this.sound.add('music');
         music.play();
+        eemusic = this.sound.add('rickroll');
+        eemusic.play();
+
         this.scene.start('mainMenuScene');
     }
     
