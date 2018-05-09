@@ -1,11 +1,12 @@
 <html>
 <head>
-    <script src="phaser/dist/phaser.js"></script>
-    <script src="js/js_game1/bonusStage.js"></script>
-    <script src="js/js_game1/catchOver.js"></script>
-    <script src="js/js_game1/catch.js"></script>
-    <script src="js/js_game1/startCatch.js"></script>
-    
+    <script type="text/javascript" src="../phaser/dist/phaser.js"></script>
+    <script type="text/javascript" src="backgroundScene.js"></script>
+    <script type="text/javascript" src="loading.js"></script>
+    <script type="text/javascript" src="bonusStage.js"></script>
+    <script type="text/javascript" src="catchOver.js"></script>
+    <script type="text/javascript" src="catch.js"></script>
+    <script type="text/javascript" src="startCatch.js"></script>
     
 </head>
 <body>
@@ -14,6 +15,9 @@
     type: Phaser.AUTO,
     width: 400,
     height: 600,
+    loader: {
+            baseURL: 'image/assets_1'
+        },
     physics: {
         default: 'arcade',
         arcade: {
@@ -21,7 +25,8 @@
             debug: false
         }
     },
-    scene: [startCatch, catchOver, mainScene, bonusStage]
+    audio: {disableWebAudio: false},
+    scene:[backgroundScene, startCatch, catchOver, mainScene, bonusStage]
     };
     var game=new Phaser.Game(config);
     
