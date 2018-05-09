@@ -10,7 +10,7 @@ html, body {
 	background-color: #4AA027;
 	padding: 1% 0;
 	font-size: 1.2em;
-	/* height: 11%; */
+	min-height: 75px;
 }
 
 .navbar-brand {
@@ -29,7 +29,9 @@ html, body {
 	padding-right: 20px;
 }
 
-.navbar .navbar-nav li a:hover, .navbar-light .navbar-nav li a.active {
+.navbar .navbar-nav lia:
+
+.navbar .navbar-nav li a:hover, .navbar-nav li a.active {
 	color: #00e600;
 }
 
@@ -170,7 +172,7 @@ footer {
 	background-color: #4AA027;
 	padding: 5% 5% 10% 5%;
 	color: white;
-	max-height: 25%;
+	min-height: 25%;
 	padding-top: 10px;
 }
 
