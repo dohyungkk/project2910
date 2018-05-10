@@ -13,16 +13,52 @@ var loadScene = new Phaser.Class({
     },
 
     preload: function() {
-        this.add.image(400,300, 'mainMenuScreen');
+        //this.add.image(400,300, 'mainMenuScreen');
+        
+        var progText = this.add.text(575,550, '', {font: '40px Arial', fill: '#FFFFFF'});
+
+        var progOutline = this.add.graphics()
+        progOutline.fillStyle(0xFFFFFF, 100);
+        progOutline.fillRect(0,490,800,50);
+
         var progress = this.add.graphics();
+
         this.load.on('progress', function (value) {
             progress.clear();
-            progress.fillStyle(0xffffff, 1);
-            progress.fillRect(0,270,800*value,60);
+            progress.fillStyle(0x88FF88, value);
+            progress.fillRect(0,500,800*value,30);
+            
+            if(Math.floor(value*100) < 10) {
+                progText.setText("L");
+            } else if(Math.floor(value*100) < 20) {
+                progText.setText("LO");
+            } else if(Math.floor(value*100) < 30) {
+                progText.setText("LOA");
+            } else if(Math.floor(value*100) < 40) {
+                progText.setText("LOAD");
+            } else if(Math.floor(value*100) < 50) {
+                progText.setText("LOADI");
+            } else if(Math.floor(value*100) < 60) {
+                progText.setText("LOADIN");
+            } else if(Math.floor(value*100) < 70) {
+                progText.setText("LOADING");
+            } else if(Math.floor(value*100) < 80) {
+                progText.setText("LOADING.");
+            } else if(Math.floor(value*100) < 90) {
+                progText.setText("LOADING..");
+            } else if(Math.floor(value*100) < 100) {
+                progText.setText("LOADING...");
+            }
+
         });
 
         this.load.on('complete', function() {
-            progress.destroy();
+            //progress.destroy();
+
+
+
+
+
         });
 
         //load most used files

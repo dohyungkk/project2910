@@ -10,6 +10,7 @@ var bootScene = new Phaser.Class({
 
     preload: function() {
         this.load.image('mainMenuScreen', 'mainMenu/mainMenu.png')
+        this.load.image('loadimage', 'mainMenu/loadingBar.png');
     },
 
     create: function () {
