@@ -36,5 +36,8 @@ var catchOver = new Phaser.Class({
             music.pause();
             this.scene.start('mainScene');
         },this);
+
+        document.getElementById("game1score").value =score;
+        document.getElementById("game1form").submit();
     },
 });
