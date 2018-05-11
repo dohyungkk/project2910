@@ -16,10 +16,14 @@ var mainMenuScene = new Phaser.Class({
     },
 
     preload: function() {
+        eemusic.pause();
+        music.resume();
+
         eeSign1 = 0;
         eeSign2 = 0;
         eeSign3 = 0;
         eeSign4 = 0;
+
     },
 
     create: function() {
@@ -95,6 +99,7 @@ var mainMenuScene = new Phaser.Class({
             this.setTint(0xCCCCCC);
         });
         
+        /*
         //making the webpage have the scores
         var scoreBtn = this.add.sprite(400,500, 'scoreBtn').setInteractive();
         scoreBtn.on('pointerover', function() {
@@ -110,9 +115,9 @@ var mainMenuScene = new Phaser.Class({
         scoreBtn.on('pointerup', function() {
             this.setTint(0xCCCCCC);
         });
+        */
 
         //Making the pause/resume music button
-
         var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();
         soundBtn.on('pointerover', function() {
             this.setTint(0xCCCCCC);
@@ -138,6 +143,10 @@ var mainMenuScene = new Phaser.Class({
         //switch scene to the game if it is 1
         if(mainMenuSwitch === 1) {
             mainMenuSwitch = 0;
+            if(eeSign1 == 1 && eeSign2 == 1 & eeSign3 == 1 && eeSign4 == 1) {
+                music.pause();
+                eemusic.resume();
+            }
             this.scene.start('playScene');
         }
     }

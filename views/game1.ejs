@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,11 +40,34 @@
     });
   </script>
   <script>
+=======
+<html>
+    <head>
+        <script type="text/javascript" src="phaser/dist/phaser.js"></script>
+        <script type="text/javascript" src="js/js_game1/backgroundScene.js"></script>
+        <script type="text/javascript" src="js/js_game1/bonusStage.js"></script>
+        <script type="text/javascript" src="js/js_game1/catchOver.js"></script>
+        <script type="text/javascript" src="js/js_game1/catch.js"></script>
+        <script type="text/javascript" src="js/js_game1/startCatch.js"></script>
+    
+    </head>
+    <body>
+        <form id="game1form" action="/game1" method="post">
+            <input type="hidden" id="game1score" name="game1score">
+        </form>
+        <script>
+>>>>>>> f1e9de7217e36288b55f2fabc8e1d95552f93580
             var config = {
             type: Phaser.AUTO,
             width: 400,
             height: 600,
+<<<<<<< HEAD
             parent: 'gameWindow',
+=======
+            loader: {
+                    baseURL: 'image/assets_1'
+                },
+>>>>>>> f1e9de7217e36288b55f2fabc8e1d95552f93580
             physics: {
                 default: 'arcade',
                 arcade: {
@@ -51,6 +75,7 @@
                     debug: false
                 }
             },
+<<<<<<< HEAD
             scene: [startCatch, catchOver, mainScene, bonusStage]
             };
             var game=new Phaser.Game(config);
@@ -115,3 +140,13 @@
         
     </body>
 </html>
+=======
+            audio: {disableWebAudio: false},
+            scene:[backgroundScene, startCatch, catchOver, mainScene, bonusStage]
+            };
+            var game=new Phaser.Game(config);
+            
+        </script>
+    </body>
+</html> 
+>>>>>>> f1e9de7217e36288b55f2fabc8e1d95552f93580

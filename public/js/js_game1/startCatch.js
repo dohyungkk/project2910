@@ -1,40 +1,44 @@
-var player;
-var platform;
 var menu;
-var music;
-// var musicIcon;
 var startCatch = new Phaser.Class({
     Extends: Phaser.Scene,
     
     initialize:
     
     function startCatch() {
-    Phaser.Scene.call(this, {key: 'startCatch'});
+    Phaser.Scene.call(this, {key: 'startCatch', active: true});
     },
         
     preload: function ()
-    {
-        this.load.image('ground', 'image/assets_1/platform3.png');
-        this.load.image('sky', 'image/assets_1/sky.png');
-        this.load.image('box', 'image/assets_1/greenBin.png');
-        this.load.image('start', 'image/assets_1/play.png');
-        // this.load.image('musicOn', 'assets/musicOn.png')
-        // this.load.image('musicOff', 'assets/musicOff.png');
-        this.load.audio('intro', 'image/assets_1/music/mainIntro.mp3');
+    {   
+
+        var progress = this.add.text(60,250,'Loading...', { fontSize: '50px', fill: '#000'});;
+
+        this.load.on('complete', function () {
+
+            progress.destroy();
+
+        });
+        this.load.image('start', 'play.png');
+        this.load.image('foodWaste', 'mold_cheese.png');
+        this.load.image('heart', 'heart.png');
+        this.load.image('pizza', 'pizza_slice.png');
+        this.load.image('banana', 'banana_peel.png');
+        this.load.image('potato', 'Potato.png');
+        this.load.image('chicken', 'drumstick.png');
+        this.load.image('gameOver', 'gameover.png');
+        this.load.image('restart', 'replay.png');
+
+        this.load.audio('musicOver', 'music/overMusic.mp3');
+        this.load.audio('mainMusic', 'music/mainGame.mp3');
+        this.load.audio('soundEffect', 'music/effect.mp3');
+        this.load.audio('intro', 'music/mainIntro.mp3');
+        this.load.audio('bonusMusic', 'music/bonusMusic.mp3');
         
     },
 
     create: function ()
-    {
-        this.add.image(400, 300, 'sky');
-        
-        platform = this.physics.add.staticImage(192, 600, 'ground');
-        
-        player = this.physics.add.sprite(200, 450, 'box');
-        player.setScale(0.5);
-        player.setCollideWorldBounds(true);
-        this.physics.add.collider(player, platform);
-        
+    {   
+        this.scene.launch("backgroundScene");
         menu=this.physics.add.staticImage(200, 300, 'start');
         menu.setScale(0.25);
         this.input.on('pointerdown', function() {
@@ -42,20 +46,12 @@ var startCatch = new Phaser.Class({
             this.scene.start('mainScene');
         },this);
 
-        // musicIcon = this.physics.add.staticImage(350, 20, 'musicOn').setInteractive();
-        // musicIcon.setScale(0.25);
-        // musicIcon.on('pointerdown', function() {
-        //     if(music.isPaused) {
-        //         music.resume();
-        //     } else {
-        //         music.pause();
-        //     }
-        // })
         music = this.sound.add('intro');
         music.play();
         music.once('looped', function(sound) {
             startstem.call(this, music, 'musicOver');
         }, this);
+        
     },
 });
     

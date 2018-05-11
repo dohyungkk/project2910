@@ -111,15 +111,24 @@ var playScene = new Phaser.Class({
         reference = this;
 
         //Making the invisble shelves
-        fruitPlatform = this.physics.add.staticGroup();
-        fruitPlatform.create(100, 150, 'fruitSign');
-        dairyPlatform = this.physics.add.staticGroup();
-        dairyPlatform.create(100, 350, 'dairySign');
-        veggiePlatform = this.physics.add.staticGroup();
-        veggiePlatform.create(700, 150, 'veggieSign');
-        meatPlatform = this.physics.add.staticGroup();
-        meatPlatform.create(700, 350, 'meatSign');
         
+        fruitPlatform = this.physics.add.staticGroup();
+        fruitPlatform.create(125, 150, 'fruitSign');
+        dairyPlatform = this.physics.add.staticGroup();
+        dairyPlatform.create(125, 350, 'dairySign');
+        veggiePlatform = this.physics.add.staticGroup();
+        veggiePlatform.create(675, 150, 'veggieSign');
+        meatPlatform = this.physics.add.staticGroup();
+        meatPlatform.create(675, 350, 'meatSign');
+        
+
+
+        /*
+        fruitPlatform = this.add.sprite(100,150,'fruitSign');
+        dairyPlatform = this.add.sprite(100,350, 'dairySign');
+        veggiePlatform = this.add.sprite(700,150, 'veggieSign');
+        meatPlatform = this.add.sprite(700,350, 'meatSign');
+        */
 
 
         //makes the first timer
@@ -143,6 +152,44 @@ var playScene = new Phaser.Class({
         && eeSign3 == 1 && eeSign4 == 1) {
             easterEgg = this.add.sprite(100,500, 'greenBin').setScale(0.5);
         }
+
+
+        var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();
+        soundBtn.on('pointerover', function() {
+            this.setTint(0xCCCCCC);
+        });
+        soundBtn.on('pointerout', function() {
+            this.clearTint();
+        });
+        soundBtn.on('pointerdown', function() {
+            this.setTint(0x999999);
+            if(music.isPaused) { //resume music
+                music.resume();
+            } else if(music.isPlaying){ //pause music
+                music.pause();
+            }
+        });
+        soundBtn.on('pointerup', function() {
+            this.setTint(0xCCCCCC);
+        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     },
@@ -176,8 +223,6 @@ var playScene = new Phaser.Class({
             losetype = 1;
             gameOver(0);
         }
-
-        //update time left
         diffTimeText.setText("Time Left: " + (60 - Math.floor(60 * diffTimer.getProgress())));
 
 
@@ -233,7 +278,7 @@ function addItemColliders() {
     reference.physics.add.collider(meat, meat);
 
     //Adding specific colliders for moving to the shelves and places it on the shelf and is unmovable again
-    reference.physics.add.overlap(fruit, fruitPlatform, function(fruit){
+    reference.physics.add.collider(fruit, fruitPlatform, function(fruit){
         fruit.disableBody(true, true);
         numFruit--;
         score++;
@@ -242,7 +287,7 @@ function addItemColliders() {
         reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(150,160), 'fruit');
     }, null, reference);
 
-    reference.physics.add.overlap(dairy, dairyPlatform, function(dairy){
+    reference.physics.add.collider(dairy, dairyPlatform, function(dairy){
         dairy.disableBody(true, true);
         numDairy--;
         score++;
@@ -251,7 +296,7 @@ function addItemColliders() {
         reference.add.sprite(Phaser.Math.Between(50,150), Phaser.Math.Between(340,355), 'dairy');
     }, null, reference);
 
-    reference.physics.add.overlap(veggie, veggiePlatform, function(veggie){
+    reference.physics.add.collider(veggie, veggiePlatform, function(veggie){
         veggie.disableBody(true, true);
         numVeggies--;
         score++;
@@ -260,7 +305,7 @@ function addItemColliders() {
         reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(100,150), 'veggies');
     }, null, reference);
 
-    reference.physics.add.overlap(meat, meatPlatform, function(meat){
+    reference.physics.add.collider(meat, meatPlatform, function(meat){
         meat.disableBody(true, true);
         numMeat--;
         score++;
@@ -268,6 +313,24 @@ function addItemColliders() {
         scoreText.setText("Score: " + score);
         reference.add.sprite(Phaser.Math.Between(650,750), Phaser.Math.Between(350,375), 'meat');
     }, null, reference);
+}
+
+function itemGroupSetup(itemChild) {
+    itemChild.setCollideWorldBounds(true);
+    itemChild.setBounce(0.5);
+    itemChild.setInteractive();
+    itemChild.on('pointerover', function() {
+        this.setTint(0xAAAAAA);
+    });
+    itemChild.on('pointerout', function() {
+        this.clearTint();
+    });
+     
+    reference.input.setDraggable(itemChild);
+    reference.input.on('drag', function(pointer, gameObject, dragX, dragY) {
+        gameObject.x = dragX;
+        gameObject.y = dragY;
+    });
 }
 
 //Function to spawn an item
@@ -279,21 +342,7 @@ function spawner(toSpawn, key, textChange, numOfItems) {
     }
 
     toSpawn.children.iterate(function(child) {
-        child.setCollideWorldBounds(true);
-        child.setBounce(0.5);
-        child.setInteractive();
-        child.on('pointerover', function() {
-            this.setTint(0xAAAAAA);
-        });
-        child.on('pointerout', function() {
-            this.clearTint();
-        });
-        
-        reference.input.setDraggable(child);
-        reference.input.on('drag', function(pointer, gameObject, dragX, dragY) {
-            gameObject.x = dragX;
-            gameObject.y = dragY;
-        });
+        itemGroupSetup(child);
     });
 
     //Setting the items to the toSpawn it corresponds to to setup for collisions
@@ -315,6 +364,8 @@ function spawner(toSpawn, key, textChange, numOfItems) {
     reference.physics.add.collider(toSpawn, cart);
 
     //Adding collider for it to collide with it's corresponding platform
+
+    /*
     switch(key) {
         case 'fruit':
             reference.physics.add.collider(toSpawn, fruitPlatform);
@@ -328,6 +379,7 @@ function spawner(toSpawn, key, textChange, numOfItems) {
         default: //for meat
             reference.physics.add.collider(toSpawn, meatPlatform);
     }
+    */
 }
 
 //Deletes all of the groups' children
@@ -347,6 +399,8 @@ function deleteChild(toDelete) {
 
 //Displays the gameover message with the chance to restart or go back to the start screen
 function gameOver(type) {
+    
+    //Submit score here automatically
     lose = 1;
     diffTimer.remove(false);
     reference.physics.pause();
@@ -417,3 +471,6 @@ function toNextLevel() {
     veggiesText.setText("Veggies: " + numVeggies + " / " + numVeggiesNeeded);
     meatText.setText("Meat: " + numMeat + " / " + numMeatNeeded);
 }
+
+
+
