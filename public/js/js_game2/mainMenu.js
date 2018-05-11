@@ -99,6 +99,7 @@ var mainMenuScene = new Phaser.Class({
             this.setTint(0xCCCCCC);
         });
         
+        /*
         //making the webpage have the scores
         var scoreBtn = this.add.sprite(400,500, 'scoreBtn').setInteractive();
         scoreBtn.on('pointerover', function() {
@@ -114,9 +115,9 @@ var mainMenuScene = new Phaser.Class({
         scoreBtn.on('pointerup', function() {
             this.setTint(0xCCCCCC);
         });
+        */
 
         //Making the pause/resume music button
-
         var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();
         soundBtn.on('pointerover', function() {
             this.setTint(0xCCCCCC);
