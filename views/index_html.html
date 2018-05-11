@@ -17,12 +17,10 @@
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
   <script src="../public/js/js_main/wow.min.js"></script>
-              <script>
-              new WOW().init();
-              </script>
-  <!-- edited-->
+  <script>
+    new WOW().init();
+  </script>
   <script> 
-
     $(document).on('click', 'a[href^="#"]', function (event) {
       event.preventDefault();
 
@@ -31,25 +29,21 @@
       }, 1000);
     });
   </script>
-  
+
 </head>
 
-<!-- edited-->
-
-<!-- for any href add ../public/ iat the begining -->
-
 <body>
-<!-- edited-->
+
   <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#home"><img src="../public/image/img_main/logo.png"></a>
+      <a class="navbar-brand" href="#"><img src="../public/image/img_main/logo.png"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"> </span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#home">Home</a>
+            <a class="nav-link" href="#">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#gamesList">Games</a>
@@ -61,7 +55,7 @@
             <a class="nav-link" href="#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Guest</a>
+            <a class="nav-link" href="#"><%=greeting%></a>
           </li>
         </ul>
       </div>
@@ -75,7 +69,8 @@
         <h1>FoodSavers</h1>
       </section>
       <h3>Save Your Food</h3>
-      <a href="#" class="btn btn-default btn-lg">Login</a>
+      <h4><%= greeting %></h4>
+      <a href= <%= lgBtnLnk %> class="btn btn-default btn-lg"><%= lgBtn %></a>
     </div>
   </div>
   
@@ -84,12 +79,45 @@
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
+            <img src="../public/image/img_main/compost.png" class="wow fadeInUp">
+            <a href="/game1" class="btn btn-default btn-lg">Play</a>
+          </div>
+          <div class="col-sm-6 text-center">
+            <h2 class="wow fadeInLeft">Compost Mania</h2>
+            <p class = "wow fadeInRight" class="lead">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6 text-center">
+            <h2 class="wow fadeInLeft">Wise Shopping</h2>
+            <p class = "wow fadeInRight" class="lead">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+          </div>
+          <div class="col-sm-6">
+            <img src="../public/image/img_main/groceryshop.png" class="wow fadeInUp">
+            <a href="/game2" class="btn btn-default btn-lg">Play</a>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+
+    <div class="padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
             <img src="../public/image/img_main/groceryshop.png" class="wow fadeInUp">
           </div>
           <div class="col-sm-6 text-center">
-            <h2 class="wow fadeInLeft">All About Us!</h2>
+            <h2 class="wow fadeInLeft">TBA</h2>
             <p class = "wow fadeInRight" class="lead">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
           </div>
+          
+          
         </div>
       </div>
     </div>
@@ -120,29 +148,29 @@
       </div>
     </div> -->
 
-    <div class="padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4 class="wow fadeInLeft">Game1</h4>
-            <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+    <!-- <div class="padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <h4 class="wow fadeInLeft">Game1</h4>
+              <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <img src="../public/image/img_main/compost.png" class="wow fadeInUp" class="img-responsive">
+            <a href="/game1" class="btn btn-default btn-lg">Play</a>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
+            <h4 class="wow fadeInLeft">Game2</h4>
+              <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+          </div>
+          <div class="col-lg-3 col- md-3 col-sm-6 col-xs-12">
+            <img src="../public/image/img_main/groceryshop.png" class="wow fadeInUp" class="img-responsive">
+            <a href="/game2" class="btn btn-default btn-lg">Play</a>
+          </div>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <img src="../public/image/img_main/compost.png" class="wow fadeInUp" class="img-responsive">
-          <a href="/game1" class="btn btn-default btn-lg">Play</a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4 class="wow fadeInLeft">Game2</h4>
-            <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-lg-3 col- md-3 col-sm-6 col-xs-12">
-          <img src="../public/image/img_main/groceryshop.png" class="wow fadeInUp" class="img-responsive">
-          <a href="/game2" class="btn btn-default btn-lg">Play</a>
-        </div>
-      </div>
 
-    </div>
-    </div>
+      </div>
+    </div> -->
   </div>
 
   <div id="fixed">
