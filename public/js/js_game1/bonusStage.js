@@ -11,15 +11,8 @@ var bonusStage = new Phaser.Class({
     },
     create: function ()
     {
-        // this.scene.launch('backgroundScene');
-        this.add.image(400, 300, 'sky');
+        this.scene.launch('space');
         
-        platform = this.physics.add.staticImage(192, 600, 'ground');
-        
-        player = this.physics.add.sprite(200, 450, 'box');
-        player.setScale(0.5);
-        player.setCollideWorldBounds(true);
-        this.physics.add.collider(player, platform);
         hpImage = this.physics.add.group({
             key: 'heart',
             repeat: health-1,
@@ -49,6 +42,7 @@ var bonusStage = new Phaser.Class({
             potatoStage = false;
             potatoNum=20;
             music.pause();
+            this.scene.stop('space');
             this.scene.start('mainScene')   
         }
     }

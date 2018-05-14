@@ -18,6 +18,8 @@
 
   <script src="phaser/dist/phaser.js"></script>
   <script src="js/js_game1/backgroundScene.js"></script>
+  <script src="js/js_game1/endBack.js"></script>
+  <script src="js/js_game1/space.js"></script>
   <script src="js/js_game1/bonusStage.js"></script>
   <script src="js/js_game1/catchOver.js"></script>
   <script src="js/js_game1/catch.js"></script>
@@ -103,7 +105,7 @@
                     }
                 },
                 audio: {disableWebAudio: false},
-                scene: [backgroundScene, startCatch, catchOver, mainScene, bonusStage]
+                scene: [backgroundScene, space, endBack, startCatch, mainScene,  catchOver, bonusStage]
                 };
                 var game=new Phaser.Game(config);
                 </script>   

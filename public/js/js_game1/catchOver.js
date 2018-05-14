@@ -23,7 +23,7 @@ var catchOver = new Phaser.Class({
             startstem.call(this, music, 'musicOver');
         }, this);
 
-        overPage = this.physics.add.staticImage(200, 250, 'gameOver');
+        overPage = this.physics.add.staticImage(200, 250, 'gameOver').setBlendMode(Phaser.BlendModes.SCREEN);
         overPage.setScale(0.9);
         scoreText = this.add.text(110,270,'Score: ' + score, { fontSize: '32px', fill: '#000'});
         died = this.add.text(110,175,'Game Over', { fontSize: '32px', fill: 'Red'});
@@ -34,6 +34,7 @@ var catchOver = new Phaser.Class({
             score=0;
             health=10;
             music.pause();
+            this.scene.stop('endBack');
             this.scene.start('mainScene');
         },this);
 
