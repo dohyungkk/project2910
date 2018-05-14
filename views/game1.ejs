@@ -36,27 +36,7 @@
       }, 1000);
     });
   </script>
-  <script>
-            var config = {
-            type: Phaser.AUTO,
-            width: 400,
-            height: 600,
-            parent: 'gameWindow',
-            loader: {
-                    baseURL: 'image/assets_1'
-                },
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: {y: 150},
-                    debug: false
-                }
-            },
-            audio: {disableWebAudio: false},
-            scene: [backgroundScene, startCatch, catchOver, mainScene, bonusStage]
-            };
-            var game=new Phaser.Game(config);
-            </script>
+
 </head>
     <body>
         <form id="game1form" action="/game1" method="post">
@@ -92,9 +72,7 @@
 
             <div class ="container-fluid">
                 <div class="row">
-                    <div class="col-xs-sm-12" id="gameWindow">
-                        
-                    </div>
+                    <div class="col-xs-sm-12" id="gameWindow"></div>
                 </div>
             </div>
 
@@ -107,6 +85,27 @@
                         <h1>LEADER BOARD</h1>
                     </div>
                 </div>
-            </div>   
+            </div>
+            <script>
+                var config = {
+                type: Phaser.AUTO,
+                width: 400,
+                height: 600,
+                parent: 'gameWindow',
+                loader: {
+                        baseURL: 'image/assets_1'
+                    },
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        gravity: {y: 150},
+                        debug: false
+                    }
+                },
+                audio: {disableWebAudio: false},
+                scene: [backgroundScene, startCatch, catchOver, mainScene, bonusStage]
+                };
+                var game=new Phaser.Game(config);
+                </script>   
     </body>
 </html>
