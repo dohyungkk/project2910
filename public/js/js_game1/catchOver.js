@@ -16,7 +16,7 @@ var catchOver = new Phaser.Class({
 
     create: function ()
     {
-        this.scene.launch('backgroundScene');
+        this.scene.launch('endBack');
         music = this.sound.add('musicOver');
         music.play();
         music.once('looped', function(sound) {
