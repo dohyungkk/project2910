@@ -457,7 +457,8 @@ function gameOver(type) {
         this.setTint(0xCCCCCC);
     });
     
-    
+    document.getElementById("game2score").value =score;
+    document.getElementById("game2form").submit();
 
 }
 
