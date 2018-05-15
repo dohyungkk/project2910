@@ -30,12 +30,13 @@ var catchOver = new Phaser.Class({
         menu=this.physics.add.staticImage(200, 420, 'restart');
         menu.setScale(0.25);
         this.input.once('pointerdown', function() {
+            window.location.replace("/game1");
             gameOver = false;
             score=0;
             health=10;
             music.pause();
             this.scene.stop('endBack');
-            this.scene.start('mainScene');
+            // this.scene.start('startCatch');
         },this);
 
         document.getElementById("game1score").value =score;
