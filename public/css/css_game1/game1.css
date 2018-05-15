@@ -4,3 +4,7 @@ canvas {
     object-fit: contain;
     /* <https://caniuse.com/#feat=object-fit> */
   }
+
+#game1Row{
+    margin-top:-4px;
+}
