@@ -3,8 +3,10 @@
 <head>
     <title>Document</title>
     <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="css/css_main/style.css" rel="stylesheet" />
+  <link href="css/css_game1/game1.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="css/css_main/animate.css" rel="stylesheet"/>
@@ -93,6 +95,8 @@
                 type: Phaser.AUTO,
                 width: 400,
                 height: 600,
+                // width: window.innerWidth > 400 ? 400 : window.innerWidth,
+                // height: window.innerHeight-50 > 600 ? 600 : window.innerHeight,
                 parent: 'gameWindow',
                 loader: {
                         baseURL: 'image/assets_1'
