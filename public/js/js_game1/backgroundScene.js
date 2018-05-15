@@ -1,6 +1,3 @@
-var player;
-var platform;
-var music;
 var backgroundScene = new Phaser.Class({
     Extends: Phaser.Scene,
     

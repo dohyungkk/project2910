@@ -3,8 +3,10 @@
 <head>
     <title>Document</title>
     <meta charset="utf-8">
+    <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="css/css_main/style.css" rel="stylesheet" />
+  <link href="css/css_game1/game1.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <link href="css/css_main/animate.css" rel="stylesheet"/>
@@ -18,6 +20,8 @@
 
   <script src="phaser/dist/phaser.js"></script>
   <script src="js/js_game1/backgroundScene.js"></script>
+  <script src="js/js_game1/endBack.js"></script>
+  <script src="js/js_game1/space.js"></script>
   <script src="js/js_game1/bonusStage.js"></script>
   <script src="js/js_game1/catchOver.js"></script>
   <script src="js/js_game1/catch.js"></script>
@@ -36,30 +40,10 @@
       }, 1000);
     });
   </script>
-  <script>
-            var config = {
-            type: Phaser.AUTO,
-            width: 400,
-            height: 600,
-            parent: 'gameWindow',
-            loader: {
-                    baseURL: 'image/assets_1'
-                },
-            physics: {
-                default: 'arcade',
-                arcade: {
-                    gravity: {y: 150},
-                    debug: false
-                }
-            },
-            audio: {disableWebAudio: false},
-            scene: [backgroundScene, startCatch, catchOver, mainScene, bonusStage]
-            };
-            var game=new Phaser.Game(config);
-            </script>
+
 </head>
     <body>
-        <form id="game1form" action="/game1" method="post">
+        <form id="game1form" action="/game1" method="POST">
             <input type="hidden" id="game1score" name="game1score">
         </form>
         <nav class="navbar navbar-expand-md navbar-dark sticky-top">
@@ -91,10 +75,10 @@
         </nav>
 
             <div class ="container-fluid">
-                <div class="row">
-                    <div class="col-xs-sm-12" id="gameWindow">
-                        
-                    </div>
+                <div class="row" id="game1Row">
+                  <div class="col-sm"></div>  
+                  <div class="col-sm col-xs-12" id="gameWindow"></div>
+                  <div class="col-sm"></div>
                 </div>
             </div>
 
@@ -107,6 +91,29 @@
                         <h1>LEADER BOARD</h1>
                     </div>
                 </div>
-            </div>   
+            </div>
+            <script>
+                var config = {
+                type: Phaser.AUTO,
+                width: 400,
+                height: 600,
+                // width: window.innerWidth > 400 ? 400 : window.innerWidth,
+                // height: window.innerHeight-50 > 600 ? 600 : window.innerHeight,
+                parent: 'gameWindow',
+                loader: {
+                        baseURL: 'image/assets_1'
+                    },
+                physics: {
+                    default: 'arcade',
+                    arcade: {
+                        gravity: {y: 150},
+                        debug: false
+                    }
+                },
+                audio: {disableWebAudio: false},
+                scene: [backgroundScene, space, endBack, startCatch, mainScene,  catchOver, bonusStage]
+                };
+                var game=new Phaser.Game(config);
+                </script>   
     </body>
 </html>

@@ -1,4 +1,7 @@
 var menu;
+var player;
+var platform;
+var music;
 var startCatch = new Phaser.Class({
     Extends: Phaser.Scene,
     
@@ -18,6 +21,10 @@ var startCatch = new Phaser.Class({
             progress.destroy();
 
         });
+        this.load.image('endGround', 'ground.png'); 
+        this.load.image('sunsetSky', 'sunset.png');
+        this.load.image('black', 'blackBack.png');
+        this.load.image('sunlight', 'yellow.png');
         this.load.image('start', 'play.png');
         this.load.image('foodWaste', 'mold_cheese.png');
         this.load.image('heart', 'heart.png');

@@ -1,48 +1,38 @@
 
-
-
-
-/*//////////////////////////////////////////////////////////////////
-[ FONT ]*/
-
 @font-face {
   font-family: Poppins-Regular;
-  src: url('/css/css_login/fonts_login/poppins/Poppins-Regular.ttf'); 
+  src: url('fonts_login/poppins/Poppins-Regular.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Medium;
-  src: url('/css/css_login/fonts_login/poppins/Poppins-Medium.ttf'); 
+  src: url('fonts_login/poppins/Poppins-Medium.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-Bold;
-  src: url('/css/css_login/fonts_login/poppins/Poppins-Bold.ttf'); 
+  src: url('fonts_login/poppins/Poppins-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Poppins-SemiBold;
-  src: url('/css/css_login/fonts_login/poppins/Poppins-SemiBold.ttf'); 
+  src: url('fonts_login/poppins/Poppins-SemiBold.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Bold;
-  src: url('/css/css_login/fonts_login/montserrat/Montserrat-Bold.ttf'); 
+  src: url('fonts_login/montserrat/Montserrat-Bold.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-SemiBold;
-  src: url('/css/css_login/fonts_login/montserrat/Montserrat-SemiBold.ttf'); 
+  src: url('fonts_login/montserrat/Montserrat-SemiBold.ttf'); 
 }
 
 @font-face {
   font-family: Montserrat-Regular;
-  src: url('/css/css_login/fonts_login/montserrat/Montserrat-Regular.ttf'); 
+  src: url('fonts_login/montserrat/Montserrat-Regular.ttf'); 
 }
-
-
-/*//////////////////////////////////////////////////////////////////
-[ RESTYLE TAG ]*/
 
 * {
 	margin: 0px; 
@@ -55,7 +45,6 @@ body, html {
 	font-family: Poppins-Regular, sans-serif;
 }
 
-/*---------------------------------------------*/
 a {
 	font-family: Poppins-Regular;
 	font-size: 14px;
@@ -77,7 +66,7 @@ a:hover {
   color: #6675df;
 }
 
-/*---------------------------------------------*/
+
 h1,h2,h3,h4,h5,h6 {
 	margin: 0px;
 }
@@ -96,7 +85,7 @@ ul, li {
 }
 
 
-/*---------------------------------------------*/
+
 input {
 	outline: none;
 	border: none;
@@ -137,7 +126,7 @@ label {
   margin: 0;
 }
 
-/*---------------------------------------------*/
+
 button {
 	outline: none !important;
 	border: none;
@@ -152,11 +141,6 @@ iframe {
 	border: none !important;
 }
 
-/*//////////////////////////////////////////////////////////////////
-[ utility ]*/
-
-/*==================================================================
-[ Text ]*/
 .txt1 {
   font-family: Montserrat-Regular;
   font-size: 13px;
@@ -171,9 +155,6 @@ iframe {
   color: #999999;
 }
 
-
-/*==================================================================
-[ Size ]*/
 .size1 {
   width: 355px;
   max-width: 100%;
@@ -183,15 +164,10 @@ iframe {
   width: calc(100% - 43px);
 }
 
-/*==================================================================
-[ Background ]*/
 .bg1 {background: #3b5998;}
 .bg2 {background: #1da1f2;}
 .bg3 {background: #cd201f;}
 
-
-/*//////////////////////////////////////////////////////////////////
-[ login ]*/
 .limiter {
   width: 100%;
   margin: 0 auto;
@@ -227,8 +203,6 @@ iframe {
 
 }
 
-/*==================================================================
-[ login more ]*/
 .login100-more {
   width: calc(100% - 560px);
   background-repeat: no-repeat;
@@ -250,11 +224,6 @@ iframe {
   background: rgba(0,0,0,0.1);
 }
 
-
-
-/*==================================================================
-[ Form ]*/
-
 .login100-form {
   width: 560px;
   min-height: 100vh;
@@ -272,11 +241,6 @@ iframe {
   line-height: 1.2;
   text-align: center;
 }
-
-
-
-/*------------------------------------------------------------------
-[ Input ]*/
 
 .wrap-input100 {
   display: -webkit-box;
@@ -333,7 +297,7 @@ input.input100 {
   transition: all 0.4s;
 }
 
-/*---------------------------------------------*/
+
 
 .focus-input100 {
   position: absolute;
@@ -401,8 +365,6 @@ input.input100 {
   font-size: 13px;
 }
 
-/*==================================================================
-[ Restyle Checkbox ]*/
 
 .input-checkbox100 {
   display: none;
@@ -453,8 +415,6 @@ input.input100 {
 }
 
 
-/*------------------------------------------------------------------
-[ Button ]*/
 .container-login100-form-btn {
   width: 100%;
   display: -webkit-box;
@@ -498,10 +458,6 @@ input.input100 {
 }
 
 
-
-/*------------------------------------------------------------------
-[ Responsive ]*/
-
 @media (max-width: 992px) {
   .login100-form {
     width: 50%;
@@ -532,9 +488,6 @@ input.input100 {
   }
 }
 
-
-/*------------------------------------------------------------------
-[ Alert validate ]*/
 
 .validate-input {
   position: relative;
@@ -602,10 +555,6 @@ input.input100 {
   }
 }
 
-
-
-/*==================================================================
-[ Social ]*/
 .login100-form-social-item {
   width: 36px;
   height: 36px;
