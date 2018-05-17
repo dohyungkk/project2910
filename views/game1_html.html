@@ -4,7 +4,7 @@
 
 	
 
-	<title>Wise Shopping</title>
+	<title>Compost Mania</title>
 	<meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="../public/css/css_main/style.css" rel="stylesheet" />
@@ -19,12 +19,11 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-  <script type="text/javascript" src="../public/phaser/dist/phaser.js"></script>
-  <script type="text/javascript" src="../public/js/js_game2/boot.js"></script>
-  <script type="text/javascript" src="../public/js/js_game2/load.js"></script>
-  <script type="text/javascript" src="../public/js/js_game2/mainMenu.js"></script>
-  <script type="text/javascript" src="../public/js/js_game2/play.js"></script>
-  <script type="text/javascript" src="../public/js/js_game2/score.js"></script>
+  <script src="../public/phaser/dist/phaser.js"></script>
+  <script src="../public/js/js_game1/bonusStage.js"></script>
+  <script src="../public/js/js_game1/catchOver.js"></script>
+  <script src="../public/js/js_game1/catch.js"></script>
+  <script src="../public/js/js_game1/startCatch.js"></script>
 
   <script src="../public/js/js_main/wow.min.js"></script>
   <script>
@@ -39,29 +38,24 @@
       }, 1000);
     });
   </script>
-  	<script>
-	    var config = {
-	        type: Phaser.AUTO,
-	        width: 800,
-	        height: 600,
-	        parent: "gameWindow",
-	        loader: {
-	            baseURL: 'image/assets_2'
-	        },
-	        physics: {
-	            default: 'arcade',
-	            arcade: {
-	                gravity: {y: 100},
-	                debug: false
-	            }
-	        },
-	        audio: {disableWebAudio: false},
-	        backgroundColor: '#444477',
-	        version: '0.9',
-	        scene: [bootScene, loadScene, mainMenuScene, playScene]
-	    };
-	    var game = new Phaser.Game(config);
-     </script>
+  <script>
+		    var config = {
+		    type: Phaser.AUTO,
+		    width: 400,
+		    height: 600,
+		    parent: 'gameWindow',
+		    physics: {
+		        default: 'arcade',
+		        arcade: {
+		            gravity: {y: 150},
+		            debug: false
+		        }
+		    },
+		    scene: [startCatch, catchOver, mainScene, bonusStage]
+		    };
+		    var game=new Phaser.Game(config);
+		    
+		    </script>
 </head>
 	<body>
 
@@ -74,16 +68,13 @@
 		      <div class="collapse navbar-collapse" id="navbarResponsive">
 		        <ul class="navbar-nav">
 		          <li class="nav-item active">
-		            <a class="nav-link" href="#index_html.html">Home</a>
+		            <a class="nav-link" href="index_html.html">Home</a>
 		          </li>
 		          <li class="nav-item">
-		            <a class="nav-link" href="#index_html/gamesList">Games</a>
+		            <a class="nav-link" href="index_html.html#gamesList">Games</a>
 		          </li>
 		          <li class="nav-item">
-		          	<a class="nav-link" href=#game2Instructions" data-toggle="modal"> How to Play</a>
-		          </li>
-		          <li class="nav-item">
-		            <a class="nav-link" href="#">Leaderboard</a>
+		            <a class="nav-link" href="#">LeaderBoard</a>
 		          </li>
 		          <li class="nav-item">
 		            <a class="nav-link" href="#about">About</a>
@@ -96,17 +87,24 @@
 		    </div>
 	  	</nav>
 
-	  	<div class ="container-fluid">
-	  		<div class="row">
-	  			<div class="col-xs-sm-12" id="gameWindow">
-					
-				</div>
+		  	<div class ="container-fluid">
+		  		<div class="row">
+		  			<div class="col-xs-sm-12" id="gameWindow">
+						
+					</div>
+		  		</div>
+		  	</div>
+
+			<div class ="container-fluid">
+			 	<div class="row">
+		  			<div class = "col-sm-6 instructions">
+						<h1> HOW TO PLAY</h1>
+		  			</div>
+		  			<div class="col-sm-6 leaderBoard">
+		  				<h1>LEADER BOARD</h1>
+		  			</div>
+		  		</div>
 	  		</div>
-	  	</div>
-
-	  	
-
-			
 
 	  	
 
