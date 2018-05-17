@@ -98,15 +98,25 @@ html, body {
 
 #gameWindow {
 	text-align: center;
-	/* padding-top: 20px; */
-	width:100%;
-<<<<<<< HEAD
-	height: 100%;
-	object-fit: contain;
-=======
-	padding-right: 0px;
-	padding-left: 0px;
->>>>>>> 7ae002d4daa3982898691e04188284ee30fdc5ec
+	 padding-top: 10px; 
+	 padding-bottom: 10px;
+	 width:100%;
+}
+
+.modalPadding{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#modalHeader{
+	margin: 0 auto;
+}
+
+#modalClose {
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 50px;
+    margin-left: 0px;
 }
 
 
