@@ -436,7 +436,8 @@ function gameOver(type) {
     });
     retryBtn.on('pointerdown', function() {
         this.setTint(0x999999);
-        reference.scene.start('playScene');
+        //reference.scene.start('playScene');
+        window.location.replace("/game2");
     });
     retryBtn.on('pointerup', function() {
         this.setTint(0xCCCCCC);
@@ -451,7 +452,8 @@ function gameOver(type) {
     });
     backBtn.on('pointerdown', function() {
         this.setTint(0x999999);
-        reference.scene.start('mainMenuScene');
+        // reference.scene.start('mainMenuScene');
+        window.location.replace("/game2");
     });
     backBtn.on('pointerup', function() {
         this.setTint(0xCCCCCC);
