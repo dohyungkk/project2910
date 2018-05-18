@@ -119,6 +119,10 @@ html, body {
     margin-left: 0px;
 }
 
+#modalClose2 {
+	margin: auto;
+}
+
 
 .login {
 	background: url(../../image/img_main/mountains.jpeg) no-repeat center center fixed;
