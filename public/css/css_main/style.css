@@ -66,10 +66,14 @@ html, body {
 }
 
 .landing-text {
+	background: url(../../image/img_main/apple.png) no-repeat center ;
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
+	background-position: 50% 10%;
 }
+
+
 
 
 .landing-text h1 {
@@ -84,6 +88,14 @@ html, body {
 	width: 100%;
 }
 
+#gameBody {
+	background:url(../../image/img_main/game1_background.jpg) no-repeat center center fixed;
+	background-size:cover;
+}
+
+.carousel-caption {
+	color: black !important;
+}
 
 #fixed {
 	background:url(../../image/img_main/nature.jpg) no-repeat center center fixed;
@@ -201,6 +213,11 @@ button {
 .btn:hover, .btn:focus {
 	background-color: #25a890;
 	border-bottom: 4px solid#25a890;
+}
+
+.carousel-inner img {
+	width: 100%;
+	height: 100%;
 }
 
 
