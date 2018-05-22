@@ -42,7 +42,7 @@ var mainScene = new Phaser.Class({
            child.setScale(0.25);
         });
         //it loops the dropping item so it can keep dropping.
-        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(30000,100000), callback: bonusOn, callbackScope: this, repeat: 3});
+        potatos = this.time.addEvent({delay: Phaser.Math.FloatBetween(3000,10000), callback: bonusOn, callbackScope: this, repeat: 3});
 
          //it loops the dropping item so it can keep dropping.
         bananas = this.time.addEvent({delay: Phaser.Math.FloatBetween(500, 3000), callback: onEventbnn, callbackScope: this, loop: true});
@@ -60,6 +60,20 @@ var mainScene = new Phaser.Class({
         //add text on the game.
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
 
+        // this.physics.add.overlap(player, drops, collectWaste, null, this);
+        // this.physics.add.overlap(platform, drops, collision, null, this);
+        
+        // this.physics.add.overlap(player, bananas, collectWaste, null, this);
+        // this.physics.add.overlap(platform, bananas, collision, null, this);
+        
+        // this.physics.add.overlap(player, pizzas, collectWaste, null, this);
+        // this.physics.add.overlap(platform, pizzas, collision, null, this);
+        
+        // this.physics.add.overlap(player, potatos, bonusCollect, null, this);
+        // this.physics.add.overlap(platform, potatos, collision, null, this);
+        
+        // this.physics.add.overlap(player, chickens, collectWaste, null, this);
+        // this.physics.add.overlap(platform, chickens, collision, null, this);
     },
     //it is frame. This keep updating status of game
     update: function ()
