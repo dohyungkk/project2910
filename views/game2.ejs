@@ -58,16 +58,19 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#gamesList">Games</a>
+                            <a class="nav-link" href="#game2Instructions" data-toggle="modal"> How to Play </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#game2Instructions" data-toggle="modal"> How to Play </a>
+                            <a class="nav-link" href="/#gamesList">Games</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/leaderboard">Leaderboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
+                            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="navLogout" href='#'></a>
                         </li>
                     </ul>
                 </div>
@@ -255,7 +258,7 @@
     };
     var game = new Phaser.Game(config);
 </script>
-
+<script src="js/js_main/loginBtnCtr.js"></script>
 </body>
 
 <footer class="container-fluid text-center">

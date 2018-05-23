@@ -29,6 +29,7 @@
   <script src="js/js_game1/startCatch.js"></script>
 
   <script src="js/js_main/wow.min.js"></script>
+  
   <script>
     new WOW().init();
   </script>
@@ -71,9 +72,10 @@
             <a class="nav-link" href="/leaderboard">Leaderboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <%=greeting%>
-            </a>
+            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="navLogout" href='#'></a>
           </li>
         </ul>
       </div>
@@ -203,6 +205,7 @@
     };
     var game = new Phaser.Game(config);
   </script>
+  <script src="js/js_main/loginBtnCtr.js"></script>
 </body>
 
 <footer class="container-fluid text-center">
