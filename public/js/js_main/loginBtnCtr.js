@@ -1,6 +1,18 @@
 // JUNHO
 function gameBtnControl(gameBtn) {
-  var link = (gameBtn === 'game1Btn') ? '/game1' : '/game2';
+  // var link = (gameBtn === 'game1Btn') ? '/game1' : '/game2';
+  var link;
+  switch(gameBtn){
+    case 'game1Btn':
+      link = '/game1';
+      break;
+    case 'game2Btn':
+      link = '/game2';
+      break;
+    case 'game3Btn':
+      link = '/game3';
+      break;
+  }
   var cur = document.getElementById("loVerf").innerHTML;
   console.log(cur);
   $('#modalOk').click(function () {
