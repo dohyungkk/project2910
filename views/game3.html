@@ -1,0 +1,36 @@
+<html>
+<head>
+    <script type="text/javascript" src="/phaser/dist/phaser.js"></script>
+    <script type="text/javascript" src="gameLoading.js"></script>
+    <script type="text/javascript" src="gameStart.js"></script>
+    <script type="text/javascript" src="gamePlay.js"></script>
+    <script type="text/javascript" src="startingPage.js"></script>
+    <script type="text/javascript" src="gameOver.js"></script>
+ 
+    
+    
+</head>
+<body>
+    <script>
+    var config = {
+    type: Phaser.AUTO,
+    width: 1000,
+    height: 700,
+    loader: {
+            baseURL: 'assets'
+        },
+    physics: {
+        default: 'arcade',
+        arcade: {
+            gravity: {y: 2000},
+            debug: false
+        }
+    },
+    audio: {disableWebAudio: false},
+    scene:[gameLoading, startingPage, gameStart, gamePlay, gameOver]
+    };
+    var game=new Phaser.Game(config);
+    
+    </script>
+</body>
+</html> 
