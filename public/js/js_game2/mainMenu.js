@@ -59,9 +59,6 @@ var mainMenuScene = new Phaser.Class({
             sign4.setTint(0x999999);
         })
 
-
-
-
         //Adding invisible platform so the logo doesnt bounce to the bottom and cover buttons
         invisiPlatform = this.physics.add.staticGroup();
         invisiPlatform.create(400,300, 'invisiPlatform');
@@ -98,24 +95,6 @@ var mainMenuScene = new Phaser.Class({
         startBtn.on('pointerup', function() {
             this.setTint(0xCCCCCC);
         });
-        
-        /*
-        //making the webpage have the scores
-        var scoreBtn = this.add.sprite(400,500, 'scoreBtn').setInteractive();
-        scoreBtn.on('pointerover', function() {
-            this.setTint(0xCCCCCC);
-        });
-        scoreBtn.on('pointerout', function() {
-            this.clearTint();
-        });
-        scoreBtn.on('pointerdown', function() {
-            this.setTint(0x999999);
-            //insert code to switch to highscore scene
-        });
-        scoreBtn.on('pointerup', function() {
-            this.setTint(0xCCCCCC);
-        });
-        */
 
         //Making the pause/resume music button
         var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();

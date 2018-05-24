@@ -13,7 +13,6 @@ var loadScene = new Phaser.Class({
     },
 
     preload: function() {
-        //this.add.image(400,300, 'mainMenuScreen');
         
         var progText = this.add.text(575,550, '', {font: '40px Arial', fill: '#FFFFFF'});
 
@@ -54,11 +53,6 @@ var loadScene = new Phaser.Class({
 
         this.load.on('complete', function() {
             //progress.destroy();
-
-
-
-
-
         });
 
         //load most used files

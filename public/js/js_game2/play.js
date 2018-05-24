@@ -121,16 +121,6 @@ var playScene = new Phaser.Class({
         meatPlatform = this.physics.add.staticGroup();
         meatPlatform.create(675, 350, 'meatSign');
         
-
-
-        /*
-        fruitPlatform = this.add.sprite(100,150,'fruitSign');
-        dairyPlatform = this.add.sprite(100,350, 'dairySign');
-        veggiePlatform = this.add.sprite(700,150, 'veggieSign');
-        meatPlatform = this.add.sprite(700,350, 'meatSign');
-        */
-
-
         //makes the first timer
         diffTimeText = this.add.text(15, 40, "Time Left: ");
         diffTimer = this.time.addEvent({delay: 60000, callback: function() {
@@ -172,26 +162,6 @@ var playScene = new Phaser.Class({
         soundBtn.on('pointerup', function() {
             this.setTint(0xCCCCCC);
         });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     },
 
     update: function() {
@@ -362,24 +332,6 @@ function spawner(toSpawn, key, textChange, numOfItems) {
 
     //Adding default collider for all of them to collide with the cart
     reference.physics.add.collider(toSpawn, cart);
-
-    //Adding collider for it to collide with it's corresponding platform
-
-    /*
-    switch(key) {
-        case 'fruit':
-            reference.physics.add.collider(toSpawn, fruitPlatform);
-            break;
-        case 'dairy':
-            reference.physics.add.collider(toSpawn, dairyPlatform);
-            break;
-        case 'veggies':
-            reference.physics.add.collider(toSpawn, veggiePlatform);
-            break;
-        default: //for meat
-            reference.physics.add.collider(toSpawn, meatPlatform);
-    }
-    */
 }
 
 //Deletes all of the groups' children
@@ -436,7 +388,8 @@ function gameOver(type) {
     });
     retryBtn.on('pointerdown', function() {
         this.setTint(0x999999);
-        reference.scene.start('playScene');
+        //reference.scene.start('playScene');
+        window.location.replace("/game2");
     });
     retryBtn.on('pointerup', function() {
         this.setTint(0xCCCCCC);
@@ -451,13 +404,15 @@ function gameOver(type) {
     });
     backBtn.on('pointerdown', function() {
         this.setTint(0x999999);
-        reference.scene.start('mainMenuScene');
+        // reference.scene.start('mainMenuScene');
+        window.location.replace("/game2");
     });
     backBtn.on('pointerup', function() {
         this.setTint(0xCCCCCC);
     });
     
-    
+    document.getElementById("game2score").value =score;
+    document.getElementById("game2form").submit();
 
 }
 
