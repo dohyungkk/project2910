@@ -46,9 +46,9 @@ var startCatch = new Phaser.Class({
     create: function ()
     {   
         this.scene.launch("backgroundScene");
-        menu=this.physics.add.staticImage(200, 300, 'start');
+        menu=this.physics.add.staticImage(200, 300, 'start').setInteractive();
         menu.setScale(0.25);
-        this.input.on('pointerdown', function() {
+        menu.on('pointerdown', function() {
             music.pause();
             this.scene.start('mainScene');
         },this);
