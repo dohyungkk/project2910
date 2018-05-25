@@ -3,6 +3,8 @@ var tel2;
 var slash;
 var walkAttack;
 var slashAnim;
+var comboText;
+var combo = 0;
 var scoreText;
 var score = 0;
 var hpPoint = 5;
@@ -25,13 +27,34 @@ var gamePlay = new Phaser.Class({
 
     create: function ()
     {
-
         cursors = this.input.keyboard.createCursorKeys();
         keyS = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.S);
         keyD = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.D);
-        
-        sparkGroup = this.physics.add.group();
 
+        tree = this.physics.add.sprite(500, 381, 'treeGrowing').setScale(2);
+        tree.body.allowGravity = false;
+
+        particles = this.add.particles('flares');
+        var well = particles.createGravityWell({
+            x: 500,
+            y: 300,
+            power: 3,
+            epsilon: 100,
+            gravity: 100
+        });
+
+        emitter = particles.createEmitter({
+            frame: [ 'red', 'green', 'blue', 'yellow', 'white' ],
+            x: 500,
+            y: 120,
+            lifespan: 4000,
+            speed: 225,
+            scale: { start: 0.7, end: 0 },
+            blendMode: 'ADD'
+        });
+        emitter.visible = false;
+
+        sparkGroup = this.physics.add.group();
 
         ran = Math.round(Math.random());
         switch(ran) {
@@ -68,6 +91,10 @@ var gamePlay = new Phaser.Class({
         slash.visible = false;
         slash.body.allowGravity = false;
         
+        heal = this.physics.add.sprite(0,0,'heal').setScale(2.8);
+        heal.visible = false;
+        heal.body.allowGravity = false;
+
         tel1 = this.physics.add.sprite(30,10,'teleport').setScale(2.8);
         tel1.visible =false;
         tel1.body.allowGravity = false;
@@ -78,7 +105,7 @@ var gamePlay = new Phaser.Class({
         var movingL = false;
         var movingR = false;
 
-        leftB = this.add.sprite(80, 660, 'left').setScale(0.70).setInteractive();
+        leftB = this.add.sprite(80, 642, 'left').setInteractive();
         leftB.on('pointerdown', function(pointer) {
             leftB.setTint(0x999999);
             mobile = true;
@@ -98,7 +125,7 @@ var gamePlay = new Phaser.Class({
             player.anims.play('stay',true);
         },this);
 
-        rightB = this.physics.add.staticImage(170, 660, 'right').setScale(0.70).setInteractive();
+        rightB = this.physics.add.staticImage(200, 642, 'right').setInteractive();
         rightB.on('pointerdown', function(pointer)  {
             rightB.setTint(0x999999);
             mobile = true;
@@ -118,7 +145,7 @@ var gamePlay = new Phaser.Class({
             player.anims.play('stay',true);
         },this);
 
-        attackB = this.physics.add.staticImage(835, 660, 'A').setScale(0.70).setInteractive();
+        attackB = this.physics.add.staticImage(805, 642, 'A').setInteractive();
         attackB.on('pointerdown', function(pointer) {
             mobile = true;
             attackB.setTint(0x999999);
@@ -150,7 +177,7 @@ var gamePlay = new Phaser.Class({
             attackB.clearTint();
         },this);
 
-        jumpB = this.physics.add.staticImage(930, 660, 'J').setScale(0.70).setInteractive();
+        jumpB = this.physics.add.staticImage(930, 642, 'J').setInteractive();
         jumpB.on('pointerdown', function(pointer) {
             mobile = true;
             jumpB.setTint(0x999999);
@@ -163,7 +190,7 @@ var gamePlay = new Phaser.Class({
             jumpB.clearTint();
         },this);
 
-        dashB = this.physics.add.staticImage(740, 660, 'D').setScale(0.70).setInteractive();
+        dashB = this.physics.add.staticImage(680, 642, 'D').setInteractive();
         dashB.on('pointerdown', function(pointer) {
             mobile = true;
             dashB.setTint(0x999999);
@@ -184,12 +211,15 @@ var gamePlay = new Phaser.Class({
             dashB.clearTint();
         },this);
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
+        comboText = this.add.text(730,350,'COMBO ' + combo + '!', { font: '37px Stencil', fill: '#1BA1E2'});
+        comboText.visible = false;
         this.physics.add.collider(player, ground);
     },
     update: function() {
         if(hpPoint==0) {
             tree.clearTint();
             this.physics.pause();
+            // this.scene.stop('christmas');
             this.scene.start('gameOver');
             return;
         }
