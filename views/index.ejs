@@ -1,68 +1,76 @@
-<!DOCTYPE html>
+<!DOCTYPE html lang="en">
+
 <html>
+
 <head>
   <title>FoodSavers</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="image/img_main/favicon.png" type="image/png" sizes="32x32">
   <link href="css/css_main/style.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <link href="css/css_main/animate.css" rel="stylesheet"/>
-  <link href="css/css_main/waypoints.css" rel="stylesheet"/>
-  <script src="js/js_main/jquery.waypoints.min.js" type="text/javascript"></script>
-  <script src="js/js_main/waypoints.js" type="text/javascript"></script>
+  <link href="css/css_main/animate.css" rel="stylesheet" />
+  <link href="css/css_main/waypoints.css" rel="stylesheet" />
+  <script src="js/js_main/jquery.waypoints.min.js"></script>
+  <script src="js/js_main/waypoints.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-
   <script src="js/js_main/wow.min.js"></script>
-              <script>
-              new WOW().init();
-              </script>
-    <script> 
-
+  <script>
+    new WOW().init();
+  </script>
+  <script> 
     $(document).on('click', 'a[href^="#"]', function (event) {
       event.preventDefault();
 
       $('html, body').animate({
-        scrollTop: $($.attr(this,'href')).offset().top
+        scrollTop: $($.attr(this, 'href')).offset().top
       }, 1000);
     });
   </script>
-
 </head>
 
 <body>
-
   <nav class="navbar navbar-expand-md navbar-dark fixed-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src="image/img_main/logo.png"></a>
+<<<<<<< HEAD
+      <a class="navbar-brand" href="#">
+        <img src="image/img_main/logo.png" alt="apple">
+=======
+      <a class="navbar-brand" href="/">
+        <img src="image/img_main/logo.png">
+>>>>>>> 7d0ad91594d08debca3e275462afcd70e220f14b
+      </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"> </span>
       </button>
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
           <li class="nav-item active">
-            <a class="nav-link" href="#">Home</a>
+            <a class="nav-link" href="/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#gamesList">Games</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">LeaderBoard</a>
+            <a class="nav-link" href="/leaderboard">Leaderboard</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#about">About</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#"><%=greeting%></a>
+            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="navLogout" href='#'></a>
           </li>
         </ul>
       </div>
     </div>
   </nav>
-    
 
   <div id="home">
     <div class="landing-text">
@@ -70,142 +78,164 @@
         <h1>FoodSavers</h1>
       </section>
       <h3>Save Your Food</h3>
-      <h4><%= greeting %></h4>
-      <a href= <%= lgBtnLnk %> class="btn btn-default btn-lg"><%= lgBtn %></a>
+      <h4>
+        <%= greeting %>
+      </h4>
+      <a href=<%= lgBtnLnk %> class="btn btn-default btn-lg">
+        <%= lgBtn %>
+      </a>
     </div>
   </div>
-  
-  <div id="gamesList"> 
+
+  <div id="gamesList">
     <div class="padding">
       <div class="container">
         <div class="row">
           <div class="col-sm-6">
-            <img src="image/img_main/groceryshop.png" class="wow fadeInUp">
+            <img src="image/img_main/compost.png" class="wow fadeInUp" alt="compost">
+            <div class="row">
+              <div class="col align-self-center">
+                <span id='loVerf' hidden><%= username %></span>
+              </div>
+            </div>
           </div>
-          <div class="col-sm-6 text-center">
-            <h2 class="wow fadeInLeft">All About Us!</h2>
-            <p class = "wow fadeInRight" class="lead">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+          <div class="col-sm-6 text-center align-self-center">
+            <h2 class="wow fadeInLeft">Compost Mania</h2>
+            <p class="wow fadeInRight lead">Help Paul catch all the falling food waste into the green food bin.
+                This game will promote basic knowledge about food composting which is a part of
+                reducing the amount of food waste there is in the world. Easy to use controls such as
+                moving your mouse or touching the screen if you're on a mobile device. 
+                Play Compost Mania to learn more about food composting.</p>
+            <button id="game1Btn" type="button" class="btn btn-default btn-lg" onclick="gameBtnControl('game1Btn')">Play</button>
           </div>
         </div>
       </div>
     </div>
-    
-    <!-- <div class="login">
-      <div class="modal-dialog text-center">
-        <div class="col-sm-8 main-section">
-          <div class="modal-content">
-            <div class="col-12 user-img">
-              <img src="img/avatar.png">
-            </div>
 
-            <form class="col-12">
-              <div class="form-group">
-                <input type="text" class="form-control" placeholder="Enter Username">
-              </div>
-              <div class="form-group">
-                <input type="password" class="form-control" placeholder="Enter Password">
-              </div>
-              <button type="submit" class="btn"><i class="fas fa-sign-in-alt"></i>Login</button>
-            </form>
-
-            <div class="col-12 forgot">
-              <a href="#">Forgot Password?</a>
-            </div>
-          </div> 
-        </div> 
+    <!-- modal -->
+    <div class="modal fade" id="gameOption" tabindex="-1" role="dialog" aria-labelledby="Label" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="Label">Play Option</h5>
+            <button type="button" id="modalClose" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>You are not logged in</p>
+          </div>
+          <div class="modal-footer">
+            <a href="/login" role="button" class="btn btn-primarty">Login</a>
+            <button id="modalOk" class="btn btn-success">Play as Guest</button>
+          </div>
+        </div>
       </div>
-    </div> -->
+    </div>
 
     <div class="padding">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4 class="wow fadeInLeft">Game1</h4>
-            <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <img src="image/img_main/compost.png" class="wow fadeInUp" class="img-responsive">
-          <a href="/game1" class="btn btn-default btn-lg">Play</a>
-        </div>
-        <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-          <h4 class="wow fadeInLeft">Game2</h4>
-            <p class="wow fadeInRight">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-        </div>
-        <div class="col-lg-3 col- md-3 col-sm-6 col-xs-12">
-          <img src="image/img_main/groceryshop.png" class="wow fadeInUp" class="img-responsive">
-          <a href="/game2" class="btn btn-default btn-lg">Play</a>
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="image/img_main/groceryshop.png" class="wow fadeInUp" alt="grocery">
+          </div>
+          <div class="col-sm-6 text-center align-self-center">
+            <h2 class="wow fadeInLeft">Wise Shopping</h2>
+            <p class="wow fadeInRight lead">Help Sam with buying food at a grocery store by preventing them from buying too much food.
+                Buying too much food will result in food waste which is a major concern we should avoid doing.
+                If you put back too much food, you will lose and if the timer runs out you will also lose for 
+                buying too much food. Match the amount of food on the shopping list to advance to the next level.
+                Play Wise Shopping to help Sam buy food for their family and reduce food waste.</p>
+            <button id="game2Btn" type="button" class="btn btn-default btn-lg" onclick="gameBtnControl('game2Btn')">Play</button>
+          </div>
         </div>
       </div>
-
     </div>
+
+    <div class="padding">
+      <div class="container">
+        <div class="row">
+          <div class="col-sm-6">
+            <img src="image/img_main/tree_save3.png" class="wow fadeInUp" alt="tree">
+          </div>
+          <div class="col-sm-6 text-center align-self-center">
+            <h2 class="wow fadeInLeft">Tree Saviour</h2>
+            <p class="wow fadeInRight lead">Help the wandering knight Leo, defend the Tree of Life from the lifeeaters while helping the great tree grow faster by allowing compost to reach the tree to save the world from destruction.</p>
+              <button id="game3btn" type="button" class="btn btn-default btn-lg" onclick="gameBtnControl('game3Btn')">Play</button>
+            </div>
+        </div>
+      </div>
     </div>
   </div>
 
-  <div id="fixed">
-  </div>
+  <div id="fixed"></div>
 
   <div id="about" class="padding">
     <div class="container">
       <div class="row">
+        <div class="col-sm-12">
+          <h4 id="aboutheading">Who We Are...</h4>
+          <p>We are a group dedicated to reducing the amount of food waste. What we have seen is that many 
+              youth do not know much about how food waste affects our world such as wasting 
+              precious resources that our Earth may not be able to support for much longer.
+              We wish to bring awareness about food waste to the world with our games.</p>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-sm-6">
-          <h4>Who We Are...</h4>
-          <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+          <p><img src="image/img_main/poster.jpeg" class="wow fadeInUp" alt="poster"></p>
         </div>
         <div class="col-sm-6">
-          <img src="image/img_main/groceryshop.png">
+          <div id="video" class="embed-responsive embed-responsive-16by9">
+              <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/ia69Ajw8-cU" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
+          <br />
+          <div id="video" class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://www.youtube.com/embed/j4aMeW47s40" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  
+
   <footer class="container-fluid text-center">
     <div class="row">
-      <div class="col-sm-4">
-        <h3>Contact Us</h3>
-        <br>
-        <h4>Our address and contact info here.</h4>
+      <div class="col-sm-12">
+        <p><b>Contact Us</b></p>
+        3700 Willingdon Ave Burnaby, BC V5G 3H2
+        <br />
       </div>
-      <div class="col-sm-4 social">
-        <h3>Connect</h3>
-        <a href="#"><i class="fab fa-facebook"></i></a>
-        <a href="#"><i class="fab fa-twitter"></i></a>
-        <a href="#"><i class="fab fa-google-plus-g"></i></a>
-        <a href="#"><i class="fab fa-instagram"></i></a>
-        <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <div class="row">
+      <br />
+      <div class="col-sm-12">
+        <a href="https://www.facebook.com/bcitfoodsavers/">
+            <i class="fab fa-facebook" id="footerIcon"></i>
+          </a>
+          <a href="https://www.instagram.com/thefoodsavers/">　
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtu.be/ia69Ajw8-cU">　
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="mailto:ctruong9@my.bcit.ca,joh29@my.bcit.ca,kdkim7676@gmail.com,klo74@my.bcit.ca,99wlstjr@gmail.com">　
+            <i class="fas fa-envelope-square"></i>
+          </a>
       </div>
-      <div class="col-sm-4">
-        <img src="image/img_main/logo.png" class="icon">
+      <br />
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <br />
+        <p><b>Team 18</b> Chris Truong, Junho Oh, Kevin Lo, Kevin Kim, Jason Kim</p>
+        <br />
       </div>
     </div>
   </footer>
 
-
-
-
-
-
-<!--- iOS Landing Page Fix
-<section>
-	<div class="landing-text">
-		<h1>BOOTSTRAP</h1>
-		<h3>Learn the basic building blocks.</h3>
-		<a href="#" class="btn btn-default btn-lg">Get Started</a>
-	</div>
-	<div class="home-wrap">
-        <div id="home">
-		</div>
-    </div>
-</section>
--->
-
-<!--- iOS Fixed Image Fix
-<figure>
-	<div class="fixed-wrap">
-        <div id="fixed">
-		</div>
-    </div>
-</figure>
--->
-
+  <script src="js/js_main/loginBtnCtr.js"></script>
 </body>
+
 </html>

@@ -1,15 +1,18 @@
 var menu;
+var player;
+var platform;
+var music;
 var startCatch = new Phaser.Class({
     Extends: Phaser.Scene,
-    
+
     initialize:
-    
+
     function startCatch() {
     Phaser.Scene.call(this, {key: 'startCatch', active: true});
     },
-        
+
     preload: function ()
-    {   
+    {
 
         var progress = this.add.text(60,250,'Loading...', { fontSize: '50px', fill: '#000'});;
 
@@ -18,6 +21,10 @@ var startCatch = new Phaser.Class({
             progress.destroy();
 
         });
+        this.load.image('endGround', 'ground.png'); 
+        this.load.image('sunsetSky', 'sunset.png');
+        this.load.image('black', 'blackBack.png');
+        this.load.image('sunlight', 'yellow.png');
         this.load.image('start', 'play.png');
         this.load.image('foodWaste', 'mold_cheese.png');
         this.load.image('heart', 'heart.png');
@@ -33,15 +40,15 @@ var startCatch = new Phaser.Class({
         this.load.audio('soundEffect', 'music/effect.mp3');
         this.load.audio('intro', 'music/mainIntro.mp3');
         this.load.audio('bonusMusic', 'music/bonusMusic.mp3');
-        
+
     },
 
     create: function ()
-    {   
+    {
         this.scene.launch("backgroundScene");
-        menu=this.physics.add.staticImage(200, 300, 'start');
+        menu=this.physics.add.staticImage(200, 300, 'start').setInteractive();
         menu.setScale(0.25);
-        this.input.on('pointerdown', function() {
+        menu.on('pointerdown', function() {
             music.pause();
             this.scene.start('mainScene');
         },this);
@@ -51,7 +58,5 @@ var startCatch = new Phaser.Class({
         music.once('looped', function(sound) {
             startstem.call(this, music, 'musicOver');
         }, this);
-        
     },
 });
-    

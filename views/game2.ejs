@@ -1,42 +1,300 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>Shopping Overshop</title>
+<html lang="en">
 
-        <script type="text/javascript" src="phaser/dist/phaser.js"></script>
-        
-        <script type="text/javascript" src="js/js_game2/boot.js"></script>
-        <script type="text/javascript" src="js/js_game2/load.js"></script>
-        <script type="text/javascript" src="js/js_game2/mainMenu.js"></script>
-        <script type="text/javascript" src="js/js_game2/play.js"></script>
-        <script type="text/javascript" src="js/js_game2/score.js"></script>
+<head>
+
+    <title>Wise Shopping</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="image/img_main/favicon.png" type="image/png" sizes="32x32">
+    <link href="css/css_main/style.css" rel="stylesheet" />
+    <link href="css/css_game1/game1.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <link href="css/css_main/animate.css" rel="stylesheet" />
+    <link href="css/css_main/waypoints.css" rel="stylesheet" />
+    <script src="js/js_main/jquery.waypoints.min.js" type="text/javascript"></script>
+    <script src="js/js_main/waypoints.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <script type="text/javascript" src="phaser/dist/phaser.js"></script>
+    <script type="text/javascript" src="js/js_game2/boot.js"></script>
+    <script type="text/javascript" src="js/js_game2/load.js"></script>
+    <script type="text/javascript" src="js/js_game2/mainMenu.js"></script>
+    <script type="text/javascript" src="js/js_game2/play.js"></script>
+    <script type="text/javascript" src="js/js_game2/score.js"></script>
+
+    <script src="js/js_main/wow.min.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <script> 
+        $(document).on('click', 'a[href^="#"]', function (event) {
+            event.preventDefault();
+
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 1000);
+        });
+    </script>
+</head>
+
+<body id="gameBody">
+    <form id="game2form" action="/game2" method="post">
+        <input type="hidden" id="game2score" name="game2score">
+        <nav class="navbar navbar-expand-md navbar-dark sticky-top">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="/">
+                    <img src="image/img_main/logo.png">
+                </a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
+                    <span class="navbar-toggler-icon"> </span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav">
+                        <li class="nav-item active">
+                            <a class="nav-link" href="/">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#game2Instructions" data-toggle="modal"> How to Play </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/#gamesList">Games</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/leaderboard">Leaderboard</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="navLogout" href='#'></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-2"></div>
+                <div class="col-sm-8 col-xs-12" id="gameWindow"></div>
+                <div class="col-sm-2"></div>
+            </div>
+        </div>
+
+        <!-- HOW TO PLAY MODAL  -->
+        <div class="container">
 
 
-    </head>
-    <body>
-        <script>
-            var config = {
-                type: Phaser.AUTO,
-                width: 800,
-                height: 550,
-                loader: {
-                    baseURL: 'image/assets_2'
-                },
-                physics: {
-                    default: 'arcade',
-                    arcade: {
-                        gravity: {y: 100},
-                        debug: false
-                    }
-                },
-                audio: {disableWebAudio: false},
-                backgroundColor: '#444477',
-                version: '0.9',
-                scene: [bootScene, loadScene, mainMenuScene, playScene]
-            };
-            var game = new Phaser.Game(config);
+            <!-- The Modal -->
+            <div class="modal" id="game2Instructions">
+                <div class="modal-dialog modal-lg modal-dialog-centered">
+                    <div class="modal-content">
 
-        </script>
+                        <!-- Modal Header -->
+                        <div class="modal-header">
+                            <h4 class="modal-title-center" id="modalHeader"> How To Play Wise Shopping</h4>
+                            <button type="button" id="modalClose" class="close" data-dismiss="modal">&times;</button>
+                        </div>
 
-    </body>
+                        <!-- Modal body -->
+                        <div class="modal-body">
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-center align-self-center">
+                                            <p class="lead">At the start screen press
+                                                <i>Start</i> to start the game.
+                                                <br>
+                                                <br> You may also toggle the game's sound by clicking the speaker symbol at the
+                                                top right corner</p>
+                                        </div>
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct1.png">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct2.png">
+                                        </div>
+                                        <div class="col-sm-6 text-center align-self-center">
+                                            <p class="lead"> The Game will begin with food items falling into the player's cart.
+                                                <br>
+                                                <br> Each food item belongs to one of the four food groups </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-center">
+                                            <p class="lead">Each level will give the player a
+                                                <i>Shopping List</i> at the bottom right corner.
+                                                <br>
+                                                <br> The shopping list will indicate the quantity what food items the player
+                                                needs to keep in the cart.
+                                                <br>
+                                                <br> The numerator of each food item indicates the
+                                                <b>current </b>quantity of that food item in your cart and the denominator indicates
+                                                the
+                                                <b>required</b> quantity needed to stay in the cart.</p>
+                                        </div>
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct3.png">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct4.png">
+                                        </div>
+                                        <div class="col-sm-6 text-center align-self-center">
+                                            <p class="lead"> The player must sort the items of the cart by following what the Shopping List
+                                                requires.
+                                                <br>
+                                                <br> In order to advance to the next level, the player must drag and drop the
+                                                uneeded items from the cart to the shelves accordingly. </p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 text-center">
+                                            <p class="lead"> The Player must be aware of the timer at the top left corner.
+                                                <br>
+                                                <br> If the timer runs out, the player loses.
+                                                <br>
+                                                <br> Players can also lose if too much food is returned to the shelves, as the
+                                                player may not be able to meet the requirement of the shopping list.
+                                                <br>
+                                                <br>
+
+                                            </p>
+                                        </div>
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct5.png">
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <hr>
+
+                            <div class="padding modalPadding">
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="col-sm-6 align-self-center">
+                                            <img src="image/img_main/game2_instruct6.png">
+                                        </div>
+                                        <div class="col-sm-6 text-center align-self-center">
+                                            <p class="lead"> Once the game ends, The player will be able to see their score.
+                                                <br>
+                                                <br> Click
+                                                <i>Back</i> to return to the homescreen or
+                                                <i>Retry</i> to play again.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+
+                        <!-- Modal footer -->
+                        <div class="modal-footer">
+                            <button type="button" id="modalClose2" class="btn btn-danger" data-dismiss="modal">Close</button>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MODAL END -->
+<script src="js/js_main/loginBtnCtr.js"></script>
+<script>
+    var config = {
+        type: Phaser.AUTO,
+        width: 800,
+        height: 600,
+        parent: "gameWindow",
+        loader: {
+            baseURL: 'image/assets_2'
+        },
+        physics: {
+            default: 'arcade',
+            arcade: {
+                gravity: { y: 100 },
+                debug: false
+            }
+        },
+        audio: { disableWebAudio: false },
+        backgroundColor: '#444477',
+        version: '0.9',
+        scene: [bootScene, loadScene, mainMenuScene, playScene]
+    };
+    var game = new Phaser.Game(config);
+</script>
+</body>
+
+<footer class="container-fluid text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <p><b>Contact Us</b></p>
+            3700 Willingdon Ave Burnaby, BC V5G 3H2
+            <br />
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-sm-12">
+            <a href="https://www.facebook.com/bcitfoodsavers/">
+                <i class="fab fa-facebook" id="footerIcon"></i>
+              </a>
+              <a href="https://www.instagram.com/thefoodsavers/">　
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://youtu.be/ia69Ajw8-cU">　
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="mailto:ctruong9@my.bcit.ca,joh29@my.bcit.ca,kdkim7676@gmail.com
+                  ,klo74@my.bcit.ca,99wlstjr@gmail.com">　
+                <i class="fas fa-envelope-square"></i>
+              </a>
+          </div>
+          <br />
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <br />
+            <p><b>Team 18</b> Chris Truong, Junho Oh, Kevin Lo, Kevin Kim, Jason Kim</p>
+            <br />
+          </div>
+        </div>
+      </footer>
+
 </html>

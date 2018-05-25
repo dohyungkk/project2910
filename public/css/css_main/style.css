@@ -10,7 +10,7 @@ html, body {
 	background-color: #4AA027;
 	padding: 1% 0;
 	font-size: 1.2em;
-	min-height: 75px;
+	color: #ffffff;
 }
 
 .navbar-brand {
@@ -20,18 +20,23 @@ html, body {
 }
 
 .navbar-brand img {
-	height:105px;
+	height: 90px;
 	padding-top: 0;
-	margin-top: -44px;
+	margin-top: -37px;
+	margin-left: -25px;
+}
+
+.navbar-toggler {
+	max-width: 18%;
+	border: none !important;
+	margin-right: 10px;
 }
 
 .navbar-nav li {
 	padding-right: 20px;
 }
 
-.navbar .navbar-nav lia:
-
-.navbar .navbar-nav li a:hover, .navbar-nav li a.active {
+.navbar .navbar-nav li a:hover, .navbar-light .navbar-nav li a.active {
 	color: #00e600;
 }
 
@@ -42,8 +47,7 @@ html, body {
 
 .nav-link {
 		font-size: 1.1em !important;
-	}
-
+}
 
 #home {
 	background: url(../../image/img_main/green.jpg) no-repeat center center fixed;
@@ -55,11 +59,12 @@ html, body {
 }
 
 .landing-text {
+	background: url(../../image/img_main/apple.png) no-repeat center ;
 	display: table-cell;
 	text-align: center;
 	vertical-align: middle;
+	background-position: 50% 10%;
 }
-
 
 .landing-text h1 {
 	font-size: 500%;
@@ -73,6 +78,15 @@ html, body {
 	width: 100%;
 }
 
+#gameBody {
+	background:url(../../image/img_main/game1_background.jpg) no-repeat center center fixed;
+	background-size:cover;
+}
+
+.carousel-caption {
+	color: black !important;
+}
+
 #fixed {
 	background:url(../../image/img_main/nature.jpg) no-repeat center center fixed;
 	display: table;
@@ -80,7 +94,35 @@ html, body {
 	position: relative;
 	width: 100%;
 	background-size:cover;
+}
 
+
+
+#gameWindow {
+	text-align: center;
+	 padding-top: 10px; 
+	 padding-bottom: 10px;
+	 width:100%;
+}
+
+.modalPadding{
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+
+#modalHeader{
+	margin: 0 auto;
+}
+
+#modalClose {
+    padding-right: 0px;
+    padding-left: 0px;
+    width: 50px;
+    margin-left: 0px;
+}
+
+#modalClose2 {
+	margin: auto;
 }
 
 .login {
@@ -96,13 +138,6 @@ html, body {
 	margin: 0 auto;
 	margin-top: 130px;
 	padding:0;
-}
-
-.modal-content {
-	background-color: #3b4652;
-	opacity: .7;
-	padding: 0 18px;
-	box-shadow: 0px 0px 3px #848484;
 }
 
 .user-img {
@@ -162,18 +197,30 @@ button {
 	border-bottom: 4px solid#25a890;
 }
 
+.carousel-inner img {
+	width: 100%;
+	height: 100%;
+}
+
 
 .forgot {
 	padding: 5px 0 25px;
 }
 
 footer {
-	width:100%;
 	background-color: #4AA027;
-	padding: 5% 5% 10% 5%;
 	color: white;
 	min-height: 25%;
 	padding-top: 10px;
+	padding-bottom: 1px;
+}
+
+.instructions {
+	background-color: blue;
+}
+
+.leaderBoard {
+	background-color: red;
 }
 
 .social a {
@@ -183,10 +230,12 @@ footer {
 
 .fa-facebook {
 	color:#3b5998;
+	font-size: 3em;
 }
 
 .fa-twitter {
 	color:#00aced;
+	font-size: 2em;
 }
 
 .fa-google-plus-g {
@@ -195,10 +244,16 @@ footer {
 
 .fa-instagram {
 	color:#517fa4;
+	font-size: 3em;
 }
 
 .fa-youtube {
 	color: #bb0000;
+	font-size: 3em;
+}
+
+.fa-envelope-square{
+	font-size: 3em;
 }
 
 .icon {
@@ -221,75 +276,9 @@ footer {
 	}
 }
 
-
-
-
-
-/*--- iOS Landing Page Fix
-section {
- 	position: relative;
- 	width: 100%;
- 	height: 100%;
- 	display: table;
+@media(max-width: 600px) {
+	#gameWindow {
+		width: 100%;
+		height: 100%;
+	}
 }
-.home-wrap {
- 	clip: rect(0, auto, auto, 0);
- 	position: absolute;
- 	top: 0;
- 	left: 0;
- 	width: 100%;
- 	height: 100%;
-}
-#home {
-	background-image: url('img/mountains.jpeg');
- 	position: fixed;
- 	display: table;
- 	top: 0;
- 	left: 0;
- 	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-position: center center;
-	-webkit-transform: translateZ(0);
-          transform: translateZ(0);
-	will-change: transform;
-	z-index: -1;
-}
-.landing-text {
-	z-index: 100;
-	display: table-cell;
-	text-align: center;
-	vertical-align: middle;
-}
---*/
-
-/*--- iOS Fixed Image Fix
-figure {
-	position: relative;
-	width: 100%;
-	height: 60%;
-}
-.fixed-wrap {
-	clip: rect(0, auto, auto, 0);
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-}
-#fixed {
-	background-image: url('img/background.jpg');
-	position: fixed;
-	display: block;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	background-size: cover;
-	background-position: center center;
-	-webkit-transform: translateZ(0);
-          transform: translateZ(0);
-	will-change: transform;
-}
---*/
-
