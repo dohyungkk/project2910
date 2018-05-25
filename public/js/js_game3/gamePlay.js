@@ -229,6 +229,8 @@ var gamePlay = new Phaser.Class({
     },
     update: function() {
         if(hpPoint==0) {
+            music.pause();
+            springMusic.pause();
             tree.clearTint();
             this.physics.pause();
             this.scene.stop('christmas');
