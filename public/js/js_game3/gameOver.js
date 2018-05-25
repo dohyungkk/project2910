@@ -13,6 +13,8 @@ var gameOver = new Phaser.Class({
         this.load.image('gameOver', 'gameover.png');
     },
     create: function() {
+        music.pause();
+        springMusic.pause();
         this.scene.launch("sakura");
         tree = this.physics.add.sprite(500, 381, 'treeGrowing').setScale(2).play('treeOver');
         tree.body.allowGravity = false;
@@ -22,15 +24,16 @@ var gameOver = new Phaser.Class({
         var menu=this.physics.add.staticImage(500, 400, 'restart').setInteractive();
         menu.setScale(0.25);
         menu.on('pointerdown', function() {
-            sparkNum = 0;
-            treeGrowing = 0;
-            hpPoint = 5;
-            score = 0;
-            combo = 0;
+            window.location.replace("/game3");
+            // sparkNum = 0;
+            // treeGrowing = 0;
+            // hpPoint = 5;
+            // score = 0;
+            // combo = 0;
             // background.pause();
-            this.scene.stop('sakura');
-            this.scene.launch('christmas');
-            this.scene.start('gameStart');
+            // this.scene.stop('sakura');
+            // this.scene.launch('christmas');
+            // this.scene.start('gameStart');
         },this);
     }
 });
