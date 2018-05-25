@@ -1,15 +1,15 @@
 var overPage;
 var died;
 var catchOver = new Phaser.Class({
-    
+
     Extends: Phaser.Scene,
-    
+
     initialize:
-    
+
     function catchOver() {
     Phaser.Scene.call(this, {key: 'catchOver'});
     },
-        
+
     preload: function ()
     {
     },

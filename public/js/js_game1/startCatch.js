@@ -4,15 +4,15 @@ var platform;
 var music;
 var startCatch = new Phaser.Class({
     Extends: Phaser.Scene,
-    
+
     initialize:
-    
+
     function startCatch() {
     Phaser.Scene.call(this, {key: 'startCatch', active: true});
     },
-        
+
     preload: function ()
-    {   
+    {
 
         var progress = this.add.text(60,250,'Loading...', { fontSize: '50px', fill: '#000'});;
 
@@ -40,11 +40,11 @@ var startCatch = new Phaser.Class({
         this.load.audio('soundEffect', 'music/effect.mp3');
         this.load.audio('intro', 'music/mainIntro.mp3');
         this.load.audio('bonusMusic', 'music/bonusMusic.mp3');
-        
+
     },
 
     create: function ()
-    {   
+    {
         this.scene.launch("backgroundScene");
         menu=this.physics.add.staticImage(200, 300, 'start').setInteractive();
         menu.setScale(0.25);
@@ -58,7 +58,5 @@ var startCatch = new Phaser.Class({
         music.once('looped', function(sound) {
             startstem.call(this, music, 'musicOver');
         }, this);
-        
     },
 });
-    

@@ -1,15 +1,15 @@
 var pops = [];
 var space = new Phaser.Class({
     Extends: Phaser.Scene,
-    
+
     initialize:
-    
+
     function space() {
         Phaser.Scene.call(this, {key: 'space'});
     },
-        
+
     preload: function ()
-    {   
+    {
         // this.load.image('ground', 'ground.png');
         this.load.image('space', 'space4.png');
         this.load.image('box', 'greenBin.png');
@@ -19,12 +19,12 @@ var space = new Phaser.Class({
 
     create: function ()
     {
-        
+
         this.add.image(200, 300, 'space').setBlendMode(Phaser.BlendModes.DIFFERENCE);
         // platform = this.physics.add.staticImage(200, 597, 'ground');
         // platform.setScale(0.5);
         this.add.image(200, 675, 'planet').setScale(0.5);
-        
+
         for (var i = 0; i < 45; i++)
         {
         var x = Phaser.Math.Between(-30, 500);
@@ -66,4 +66,3 @@ var space = new Phaser.Class({
         }
     }
 });
-    
