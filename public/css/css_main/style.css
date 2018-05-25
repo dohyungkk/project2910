@@ -250,11 +250,7 @@ footer {
 
 .fa-facebook {
 	color:#3b5998;
-<<<<<<< HEAD
-	size: 50%;
-=======
-	font-size: 2em;
->>>>>>> 0993518571baaa3aed50802d869da2e5bebf8edf
+	font-size: 3em;
 }
 
 .fa-twitter {
@@ -268,16 +264,16 @@ footer {
 
 .fa-instagram {
 	color:#517fa4;
-	font-size: 2em;
+	font-size: 3em;
 }
 
 .fa-youtube {
 	color: #bb0000;
-	font-size: 2em;
+	font-size: 3em;
 }
 
 .fa-envelope-square{
-	font-size: 2em;
+	font-size: 3em;
 }
 
 .icon {
