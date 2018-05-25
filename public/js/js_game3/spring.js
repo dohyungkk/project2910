@@ -1,6 +1,8 @@
 var ground;
 var tree;
 var player;
+var springMusic;
+var music;
 var spring = new Phaser.Class({
     Extends: Phaser.Scene,
     
@@ -19,7 +21,7 @@ var spring = new Phaser.Class({
         
         this.load.image('mCircle2', 'mcircle2/mCircle4.png');
         this.load.image('mCircle', 'mcircle1/mCircle7.png');
-        
+        this.load.audio('springBack', 'music/springMusic.mp3');
         this.load.image('rock', 'rock.png');
     },
     create: function() {
@@ -43,5 +45,6 @@ var spring = new Phaser.Class({
             ground1.create(x, 668, 'ground');
             x += 64;
         }
+        music = this.sound.add('springBack');
     }
 });

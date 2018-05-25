@@ -13,11 +13,12 @@ var gameOver = new Phaser.Class({
         this.load.image('gameOver', 'gameover.png');
     },
     create: function() {
-        background = this.scene.launch("sunset");
-        tree = this.physics.add.staticImage(500, 450, 'tree');
+        this.scene.launch("sakura");
+        tree = this.physics.add.sprite(500, 381, 'treeGrowing').setScale(2).play('treeOver');
+        tree.body.allowGravity = false;
         var overPage = this.physics.add.staticImage(500, 290, 'gameOver').setBlendMode(Phaser.BlendModes.SCREEN);
-        var died = this.add.text(410,165,'Game Over', { fontSize: '32px', fill: 'Red'});
-        scoreText = this.add.text(400,270,'Score: ' + score, { fontSize: '32px', fill: '#000'});
+        var died = this.add.text(410,165,'Game Over', { font: '32px Stencil', fill: 'Red'});
+        scoreText = this.add.text(410,270,'Score: ' + score, { font: '32px arial', fill: '#000'});
         var menu=this.physics.add.staticImage(500, 400, 'restart').setInteractive();
         menu.setScale(0.25);
         menu.on('pointerdown', function() {
@@ -27,13 +28,9 @@ var gameOver = new Phaser.Class({
             score = 0;
             combo = 0;
             // background.pause();
-            this.scene.stop('sunset');
+            this.scene.stop('sakura');
             this.scene.launch('christmas');
-            window.location.replace("/game3");
-            // this.scene.start('gameStart');
+            this.scene.start('gameStart');
         },this);
-
-        document.getElementById("game3score").value =score;
-        document.getElementById("game3form").submit();
     }
 });

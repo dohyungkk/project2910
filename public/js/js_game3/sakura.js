@@ -13,10 +13,13 @@ var sakura = new Phaser.Class({
         this.load.image('sakurasky', 'back1/skysakura.png');
         this.load.image('mCircle5', 'mcircle2/mCircle2.png');
         this.load.image('mCircle4', 'mcircle1/mCircle5.png');
-        this.load.image('sakuraGround', 'back1/grass3.png')
+        this.load.image('sakuraGround', 'back1/grass3.png');
+
+        
 
     },
     create: function() {
+        music.pause();
         this.add.image(500,305, 'sakurasky').setScale(1.3);
         this.add.image(500,350, 'sakura').setScale(1.3);
 
@@ -32,5 +35,18 @@ var sakura = new Phaser.Class({
             ground1.create(x, 668, 'ground');
             x += 64;
         }
+        var loopMarker = {
+            name: 'loop',
+            start: 0,
+            duration: 100,
+            config: {
+                loop: true
+            }
+        };
+        music = this.sound.add('sakuraBack');
+        music.addMarker(loopMarker);
+        music.play('loop', {
+            delay: 0
+        });
     }
 });

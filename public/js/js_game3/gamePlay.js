@@ -92,20 +92,23 @@ var gamePlay = new Phaser.Class({
         slash.body.allowGravity = false;
         
         heal = this.physics.add.sprite(0,0,'heal').setScale(2.8);
+        heal.setBlendMode(Phaser.BlendModes.ADD);
         heal.visible = false;
         heal.body.allowGravity = false;
 
         tel1 = this.physics.add.sprite(30,10,'teleport').setScale(2.8);
+        tel1.setBlendMode(Phaser.BlendModes.DIFFERENCE);
         tel1.visible =false;
         tel1.body.allowGravity = false;
         tel2 = this.physics.add.sprite(10,10,'teleport5').setScale(2.8);
+        tel2.setBlendMode(Phaser.BlendModes.DIFFERENCE);
         tel2.visible = false;
         tel2.body.allowGravity = false;
         
         var movingL = false;
         var movingR = false;
 
-        leftB = this.add.sprite(80, 642, 'left').setInteractive();
+        leftB = this.add.sprite(90, 642, 'left').setInteractive();
         leftB.on('pointerdown', function(pointer) {
             leftB.setTint(0x999999);
             mobile = true;
@@ -125,7 +128,7 @@ var gamePlay = new Phaser.Class({
             player.anims.play('stay',true);
         },this);
 
-        rightB = this.physics.add.staticImage(200, 642, 'right').setInteractive();
+        rightB = this.physics.add.staticImage(250, 642, 'right').setInteractive();
         rightB.on('pointerdown', function(pointer)  {
             rightB.setTint(0x999999);
             mobile = true;
@@ -147,6 +150,7 @@ var gamePlay = new Phaser.Class({
 
         attackB = this.physics.add.staticImage(805, 642, 'A').setInteractive();
         attackB.on('pointerdown', function(pointer) {
+            swordSound.play();
             mobile = true;
             attackB.setTint(0x999999);
             if(movingR) {
@@ -173,6 +177,7 @@ var gamePlay = new Phaser.Class({
             }
         },this);
         attackB.on('pointerup', function(pointer) {
+            swordSound.pause();
             mobile = false;
             attackB.clearTint();
         },this);
@@ -182,16 +187,19 @@ var gamePlay = new Phaser.Class({
             mobile = true;
             jumpB.setTint(0x999999);
             if (player.body.touching.down) {
+                jumpSound.play();
                 player.setVelocityY(-700);
             }
         },this);
         jumpB.on('pointerup', function(pointer) {
+            jumpSound.pause();
             mobile = false;
             jumpB.clearTint();
         },this);
 
         dashB = this.physics.add.staticImage(680, 642, 'D').setInteractive();
         dashB.on('pointerdown', function(pointer) {
+            telSound.play();
             mobile = true;
             dashB.setTint(0x999999);
             tel2.x = player.x;
@@ -207,11 +215,15 @@ var gamePlay = new Phaser.Class({
             tel1.anims.play('teleportation');
         },this);
         dashB.on('pointerup', function(pointer) {
+            telSound.pause();
             mobile = false;
             dashB.clearTint();
         },this);
-        scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
-        comboText = this.add.text(730,350,'COMBO ' + combo + '!', { font: '37px Stencil', fill: '#1BA1E2'});
+
+        scoreText = this.add.text(16,16,'Score: ' + score, { font: '32px Arial', fill: '#33ABF9'});
+        scoreText.setBlendMode(Phaser.BlendModes.ADD);
+        comboText = this.add.text(650,250,'COMBO ' + combo + '!', { font: '37px Stencil', fill: '#FF69B4'});
+        comboText.setBlendMode(Phaser.BlendModes.DIFFERENCE);
         comboText.visible = false;
         this.physics.add.collider(player, ground);
     },
@@ -219,7 +231,8 @@ var gamePlay = new Phaser.Class({
         if(hpPoint==0) {
             tree.clearTint();
             this.physics.pause();
-            // this.scene.stop('christmas');
+            this.scene.stop('christmas');
+            this.scene.stop('sunset');
             this.scene.start('gameOver');
             return;
         }
@@ -229,25 +242,39 @@ var gamePlay = new Phaser.Class({
         // wall.y = player.y;
         if (mobile == false) {
             if(Phaser.Input.Keyboard.JustDown(keyD)) {
-            tel2.x = player.x;
-            tel2.y = player.y+6;
-            tel2.anims.play('teleportation5');
-            if(player.flipX) {
-                player.x = player.x - 150;
-            } else {
-                player.x = player.x + 150;
+                telSound.play();
+                tel2.x = player.x;
+                tel2.y = player.y+6;
+                tel2.anims.play('teleportation5');
+                if(player.flipX) {
+                    player.x = player.x - 150;
+                } else {
+                    player.x = player.x + 150;
+                }
+                tel1.x = player.x;
+                tel1.y = player.y+6;
+                tel1.anims.play('teleportation');
             }
-            tel1.x = player.x;
-            tel1.y = player.y+6;
-            tel1.anims.play('teleportation');
+
+            if (cursors.down.isDown) 
+            {
+                player.setVelocityY(1500);
+            }
+
+            if (cursors.up.isDown && player.body.touching.down)
+            {   
+                jumpSound.play();
+                player.setVelocityY(-610);
             }
 
             if(keyS.isDown && cursors.left.isDown) {
+                swordSound.play();
                 player.flipX = true;
                 slashing(player.x, player.y, true);
                 player.setVelocityX(-300) 
                 player.anims.play('slash', true);
             } else if (keyS.isDown && cursors.right.isDown) {
+                swordSound.play();
                 player.flipX = false;
                 slashing(player.x, player.y, false);
                 player.setVelocityX(300) 
@@ -255,6 +282,7 @@ var gamePlay = new Phaser.Class({
             }
             else if (keyS.isDown) 
             {
+                swordSound.play();
                 player.setVelocityX(0);
                 player.anims.play('attacking', true);
 
@@ -269,7 +297,7 @@ var gamePlay = new Phaser.Class({
                 slash.anims.play('slash_attack', true);
             }  
             else if (cursors.left.isDown)
-            {
+            {       
                     player.setVelocityX(-300);
                     slash.flipX = true;
                     player.anims.play('walking', true);
@@ -277,27 +305,19 @@ var gamePlay = new Phaser.Class({
                 
             }
             else if (cursors.right.isDown)
-            {
+            {       
                     player.setVelocityX(300);
                     slash.flipX = false;
                     player.anims.play('walking', true);
                     player.flipX = false;
                 
             } else
-            {
+            {   
                 player.setVelocityX(0);
                 player.anims.play('stay',true);
             }
 
-            if (cursors.down.isDown) 
-            {
-                player.setVelocityY(1500);
-            }
-
-            if (cursors.up.isDown && player.body.touching.down)
-            {
-                player.setVelocityY(-610);
-            }
+            
         }
 
         sparkGroup.children.iterate(function (child) {
