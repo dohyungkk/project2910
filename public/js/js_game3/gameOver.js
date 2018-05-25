@@ -29,7 +29,11 @@ var gameOver = new Phaser.Class({
             // background.pause();
             this.scene.stop('sunset');
             this.scene.launch('christmas');
-            this.scene.start('gameStart');
+            window.location.replace("/game3");
+            // this.scene.start('gameStart');
         },this);
+
+        document.getElementById("game3score").value =score;
+        document.getElementById("game3form").submit();
     }
 });

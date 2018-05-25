@@ -57,9 +57,6 @@ var startingPage = new Phaser.Class({
 
         this.load.image('monster', 'enemy/monster.png');
 
-        this.load.image('crystal', 'crystal3.png');
-        this.load.image('redCrystal', 'crystal4.png');
-
         this.load.image('bomb', 'enemy/Potato.png');
         this.load.image('heart', 'enemy/apple.png');
         this.load.image('enemy', 'enemy/potato.png');
