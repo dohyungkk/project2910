@@ -1,17 +1,17 @@
 var pops = [];
 var endBack = new Phaser.Class({
     Extends: Phaser.Scene,
-    
+
     initialize:
-    
+
     function endBack() {
         Phaser.Scene.call(this, {key: 'endBack' });
     },
-        
+
     preload: function ()
-    {   
+    {
         // this.load.image('bubble', 'lantern.png');
-        
+   
         // this.load.image('planet', 'blue-planet.png');
     },
 
@@ -21,10 +21,9 @@ var endBack = new Phaser.Class({
         // platform.setScale(0.5);
         this.add.image(200,400, 'black').setBlendMode(Phaser.BlendModes.DIFFERENCE).setScale(2);
         this.add.image(200, 400, 'sunsetSky').setBlendMode(Phaser.BlendModes.DIFFERENCE);
-        
-        
+
         // this.add.image(200, 675, 'planet').setScale(0.5);
-        
+
         for (var i = 0; i < 77; i++)
         {
         var x = Phaser.Math.Between(-30, 500);
@@ -63,4 +62,3 @@ var endBack = new Phaser.Class({
         }
     }
 });
-    

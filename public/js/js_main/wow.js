@@ -33,7 +33,7 @@
         detail = null;
       }
       if (document.createEvent != null) {
-        customEvent = document.createEvent('CustomEvent');
+        customEvent = document.createEvent("CustomEvent");
         customEvent.initCustomEvent(event, bubble, cancel, detail);
       } else if (document.createEventObject != null) {
         customEvent = document.createEventObject();
@@ -75,7 +75,7 @@
     };
 
     Util.prototype.innerHeight = function() {
-      if ('innerHeight' in window) {
+      if ("innerHeight" in window) {
         return window.innerHeight;
       } else {
         return document.documentElement.clientHeight;
@@ -124,10 +124,10 @@
   MutationObserver = this.MutationObserver || this.WebkitMutationObserver || this.MozMutationObserver || (MutationObserver = (function() {
     function MutationObserver() {
       if (typeof console !== "undefined" && console !== null) {
-        console.warn('MutationObserver is not supported by your browser.');
+        console.warn("MutationObserver is not supported by your browser.");
       }
       if (typeof console !== "undefined" && console !== null) {
-        console.warn('WOW.js cannot detect dom mutations, please call .sync() after loading new content.');
+        console.warn("WOW.js cannot detect dom mutations, please call .sync() after loading new content.");
       }
     }
 
@@ -142,8 +142,8 @@
   getComputedStyle = this.getComputedStyle || function(el, pseudo) {
     this.getPropertyValue = function(prop) {
       var ref;
-      if (prop === 'float') {
-        prop = 'styleFloat';
+      if (prop === "float") {
+        prop = "styleFloat";
       }
       if (getComputedStyleRX.test(prop)) {
         prop.replace(getComputedStyleRX, function(_, _char) {
@@ -159,8 +159,8 @@
 
   this.WOW = (function() {
     WOW.prototype.defaults = {
-      boxClass: 'wow',
-      animateClass: 'animated',
+      boxClass: "wow",
+      animateClass: "animated",
       offset: 0,
       mobile: true,
       live: true,
@@ -191,7 +191,7 @@
       if ((ref = document.readyState) === "interactive" || ref === "complete") {
         this.start();
       } else {
-        this.util().addEvent(document, 'DOMContentLoaded', this.start);
+        this.util().addEvent(document, "DOMContentLoaded", this.start);
       }
       return this.finished = [];
     };
@@ -231,8 +231,8 @@
         }
       }
       if (!this.disabled()) {
-        this.util().addEvent(this.config.scrollContainer || window, 'scroll', this.scrollHandler);
-        this.util().addEvent(window, 'resize', this.scrollHandler);
+        this.util().addEvent(this.config.scrollContainer || window, "scroll", this.scrollHandler);
+        this.util().addEvent(window, "resize", this.scrollHandler);
         this.interval = setInterval(this.scrollCallback, 50);
       }
       if (this.config.live) {
@@ -264,8 +264,8 @@
 
     WOW.prototype.stop = function() {
       this.stopped = true;
-      this.util().removeEvent(this.config.scrollContainer || window, 'scroll', this.scrollHandler);
-      this.util().removeEvent(window, 'resize', this.scrollHandler);
+      this.util().removeEvent(this.config.scrollContainer || window, "scroll", this.scrollHandler);
+      this.util().removeEvent(window, "resize", this.scrollHandler);
       if (this.interval != null) {
         return clearInterval(this.interval);
       }
@@ -313,18 +313,18 @@
         this.config.callback(box);
       }
       this.util().emitEvent(box, this.wowEvent);
-      this.util().addEvent(box, 'animationend', this.resetAnimation);
-      this.util().addEvent(box, 'oanimationend', this.resetAnimation);
-      this.util().addEvent(box, 'webkitAnimationEnd', this.resetAnimation);
-      this.util().addEvent(box, 'MSAnimationEnd', this.resetAnimation);
+      this.util().addEvent(box, "animationend", this.resetAnimation);
+      this.util().addEvent(box, "oanimationend", this.resetAnimation);
+      this.util().addEvent(box, "webkitAnimationEnd", this.resetAnimation);
+      this.util().addEvent(box, "MSAnimationEnd", this.resetAnimation);
       return box;
     };
 
     WOW.prototype.applyStyle = function(box, hidden) {
       var delay, duration, iteration;
-      duration = box.getAttribute('data-wow-duration');
-      delay = box.getAttribute('data-wow-delay');
-      iteration = box.getAttribute('data-wow-iteration');
+      duration = box.getAttribute("data-wow-duration");
+      delay = box.getAttribute("data-wow-delay");
+      iteration = box.getAttribute("data-wow-iteration");
       return this.animate((function(_this) {
         return function() {
           return _this.customStyle(box, hidden, duration, delay, iteration);
@@ -333,7 +333,7 @@
     };
 
     WOW.prototype.animate = (function() {
-      if ('requestAnimationFrame' in window) {
+      if ("requestAnimationFrame" in window) {
         return function(callback) {
           return window.requestAnimationFrame(callback);
         };
@@ -350,16 +350,16 @@
       results = [];
       for (j = 0, len = ref.length; j < len; j++) {
         box = ref[j];
-        results.push(box.style.visibility = 'visible');
+        results.push(box.style.visibility = "visible");
       }
       return results;
     };
 
     WOW.prototype.resetAnimation = function(event) {
       var target;
-      if (event.type.toLowerCase().indexOf('animationend') >= 0) {
+      if (event.type.toLowerCase().indexOf("animationend") >= 0) {
         target = event.target || event.srcElement;
-        return target.className = target.className.replace(this.config.animateClass, '').trim();
+        return target.className = target.className.replace(this.config.animateClass, "").trim();
       }
     };
 
@@ -367,7 +367,7 @@
       if (hidden) {
         this.cacheAnimationName(box);
       }
-      box.style.visibility = hidden ? 'hidden' : 'visible';
+      box.style.visibility = hidden ? "hidden" : "visible";
       if (duration) {
         this.vendorSet(box.style, {
           animationDuration: duration
@@ -384,7 +384,7 @@
         });
       }
       this.vendorSet(box.style, {
-        animationName: hidden ? 'none' : this.cachedAnimationName(box)
+        animationName: hidden ? "none" : this.cachedAnimationName(box)
       });
       return box;
     };
@@ -426,12 +426,12 @@
     WOW.prototype.animationName = function(box) {
       var animationName, error;
       try {
-        animationName = this.vendorCSS(box, 'animation-name').cssText;
+        animationName = this.vendorCSS(box, "animation-name").cssText;
       } catch (error) {
-        animationName = getComputedStyle(box).getPropertyValue('animation-name');
+        animationName = getComputedStyle(box).getPropertyValue("animation-name");
       }
-      if (animationName === 'none') {
-        return '';
+      if (animationName === "none") {
+        return "";
       } else {
         return animationName;
       }
@@ -490,7 +490,7 @@
 
     WOW.prototype.isVisible = function(box) {
       var bottom, offset, top, viewBottom, viewTop;
-      offset = box.getAttribute('data-wow-offset') || this.config.offset;
+      offset = box.getAttribute("data-wow-offset") || this.config.offset;
       viewTop = (this.config.scrollContainer && this.config.scrollContainer.scrollTop) || window.pageYOffset;
       viewBottom = viewTop + Math.min(this.element.clientHeight, this.util().innerHeight()) - offset;
       top = this.offsetTop(box);
