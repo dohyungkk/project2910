@@ -60,20 +60,14 @@ var mainScene = new Phaser.Class({
         //add text on the game.
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
 
-        // this.physics.add.overlap(player, drops, collectWaste, null, this);
-        // this.physics.add.overlap(platform, drops, collision, null, this);
-        
-        // this.physics.add.overlap(player, bananas, collectWaste, null, this);
-        // this.physics.add.overlap(platform, bananas, collision, null, this);
-        
-        // this.physics.add.overlap(player, pizzas, collectWaste, null, this);
-        // this.physics.add.overlap(platform, pizzas, collision, null, this);
-        
-        // this.physics.add.overlap(player, potatos, bonusCollect, null, this);
-        // this.physics.add.overlap(platform, potatos, collision, null, this);
-        
-        // this.physics.add.overlap(player, chickens, collectWaste, null, this);
-        // this.physics.add.overlap(platform, chickens, collision, null, this);
+        //pointer movement.
+        this.input.on('pointermove', function (pointer) {
+            if(player.x>0 && player.x<400) {
+            player.x=pointer.x;
+            player.y=515;
+            }
+        });
+
     },
     //it is frame. This keep updating status of game
     update: function ()
@@ -85,29 +79,7 @@ var mainScene = new Phaser.Class({
             this.scene.start('catchOver');
             return;
         }
-        //pointer movement.
-        this.input.on('pointermove', function (pointer) {
-            if(player.x>0 && player.x<400) {
-            player.x=pointer.x;
-            player.y=515;
-            }
-        });
         
-        //it checks the objects are in same position.
-        this.physics.add.overlap(player, drops, collectWaste, null, this);
-        this.physics.add.overlap(platform, drops, collision, null, this);
-        
-        this.physics.add.overlap(player, bananas, collectWaste, null, this);
-        this.physics.add.overlap(platform, bananas, collision, null, this);
-        
-        this.physics.add.overlap(player, pizzas, collectWaste, null, this);
-        this.physics.add.overlap(platform, pizzas, collision, null, this);
-        
-        this.physics.add.overlap(player, potatos, bonusCollect, null, this);
-        this.physics.add.overlap(platform, potatos, collision, null, this);
-        
-        this.physics.add.overlap(player, chickens, collectWaste, null, this);
-        this.physics.add.overlap(platform, chickens, collision, null, this);
         if(potatoStage) {
             music.pause();
             this.scene.start('bonusStage');
@@ -162,6 +134,8 @@ function onEvent () {
     }
     drops.setScale(0.05);
     drops.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, drops, collectWaste, null, this);
+    this.physics.add.overlap(platform, drops, collision, null, this);
 }
 function onEventbnn() {
     if (gameOver) {
@@ -171,6 +145,8 @@ function onEventbnn() {
     bananas.body.gravity.y = 200;
     bananas.setScale(0.015);
     bananas.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, bananas, collectWaste, null, this);
+    this.physics.add.overlap(platform, bananas, collision, null, this);
 }
 
 function onEventpzz() {
@@ -181,6 +157,8 @@ function onEventpzz() {
     pizzas.body.gravity.y = 175;
     pizzas.setScale(0.15);
     pizzas.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, pizzas, collectWaste, null, this);
+    this.physics.add.overlap(platform, pizzas, collision, null, this);
 }
 function bonusOn() {
     if (gameOver) {
@@ -190,6 +168,8 @@ function bonusOn() {
     potatos.body.gravity.y = 300;
     potatos.setScale(0.05);
     potatos.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, potatos, bonusCollect, null, this);
+    this.physics.add.overlap(platform, potatos, collision, null, this);
 }
 function onEventchk() {
     if (gameOver) {
@@ -199,4 +179,6 @@ function onEventchk() {
     chickens.body.gravity.y = 300;
     chickens.setScale(0.14);
     chickens.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, chickens, collectWaste, null, this);
+    this.physics.add.overlap(platform, chickens, collision, null, this);
 }

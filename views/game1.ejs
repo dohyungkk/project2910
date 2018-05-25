@@ -6,6 +6,7 @@
   <meta charset="utf-8">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="image/img_main/favicon.png" type="image/png" sizes="32x32">
   <link href="css/css_main/style.css" rel="stylesheet" />
   <link href="css/css_game1/game1.css" rel="stylesheet" />
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -29,6 +30,7 @@
   <script src="js/js_game1/startCatch.js"></script>
 
   <script src="js/js_main/wow.min.js"></script>
+  
   <script>
     new WOW().init();
   </script>
@@ -44,13 +46,13 @@
 
 </head>
 
-<body>
+<body id="gameBody">
   <form id="game1form" action="/game1" method="POST">
     <input type="hidden" id="game1score" name="game1score">
   </form>
   <nav class="navbar navbar-expand-md navbar-dark sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="#">
+      <a class="navbar-brand" href="/">
         <img src="image/img_main/logo.png">
       </a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -71,9 +73,10 @@
             <a class="nav-link" href="/leaderboard">Leaderboard</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">
-              <%=greeting%>
-            </a>
+            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" id="navLogout" href='#'></a>
           </li>
         </ul>
       </div>
@@ -180,6 +183,8 @@
 
   <!-- MODAL END -->
 
+
+  <script src="js/js_main/loginBtnCtr.js"></script>
   <script>
     var config = {
       type: Phaser.AUTO,
@@ -203,4 +208,39 @@
   </script>
 </body>
 
+<footer class="container-fluid text-center">
+    <div class="row">
+      <div class="col-sm-12">
+        <p><b>Contact Us</b></p>
+        3700 Willingdon Ave Burnaby, BC V5G 3H2
+        <br />
+      </div>
+    </div>
+    <div class="row">
+      <br />
+      <div class="col-sm-12">
+        <a href="https://www.facebook.com/bcitfoodsavers/">
+            <i class="fab fa-facebook" id="footerIcon"></i>
+          </a>
+          <a href="https://www.instagram.com/thefoodsavers/">　
+            <i class="fab fa-instagram"></i>
+          </a>
+          <a href="https://youtu.be/ia69Ajw8-cU">　
+            <i class="fab fa-youtube"></i>
+          </a>
+          <a href="mailto:ctruong9@my.bcit.ca,joh29@my.bcit.ca,kdkim7676@gmail.com
+              ,klo74@my.bcit.ca,99wlstjr@gmail.com">　
+            <i class="fas fa-envelope-square"></i>
+          </a>
+      </div>
+      <br />
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <br />
+        <p><b>Team 18</b> Chris Truong, Junho Oh, Kevin Lo, Kevin Kim, Jason Kim</p>
+        <br />
+      </div>
+    </div>
+  </footer>
 </html>

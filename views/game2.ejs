@@ -6,6 +6,7 @@
     <title>Wise Shopping</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="image/img_main/favicon.png" type="image/png" sizes="32x32">
     <link href="css/css_main/style.css" rel="stylesheet" />
     <link href="css/css_game1/game1.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
@@ -41,12 +42,12 @@
     </script>
 </head>
 
-<body>
+<body id="gameBody">
     <form id="game2form" action="/game2" method="post">
         <input type="hidden" id="game2score" name="game2score">
         <nav class="navbar navbar-expand-md navbar-dark sticky-top">
             <div class="container-fluid">
-                <a class="navbar-brand" href="#">
+                <a class="navbar-brand" href="/">
                     <img src="image/img_main/logo.png">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive">
@@ -58,16 +59,19 @@
                             <a class="nav-link" href="/">Home</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/#gamesList">Games</a>
+                            <a class="nav-link" href="#game2Instructions" data-toggle="modal"> How to Play </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#game2Instructions" data-toggle="modal"> How to Play </a>
+                            <a class="nav-link" href="/#gamesList">Games</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="/leaderboard">Leaderboard</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="#about">About</a>
+                            <a class="nav-link" id="grtVerf"><%=greeting%></a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="navLogout" href='#'></a>
                         </li>
                     </ul>
                 </div>
@@ -138,7 +142,7 @@
                                     <div class="row">
                                         <div class="col-sm-6 text-center">
                                             <p class="lead">Each level will give the player a
-                                                <i>Shopping List at the bottom right corner.</i>
+                                                <i>Shopping List</i> at the bottom right corner.
                                                 <br>
                                                 <br> The shopping list will indicate the quantity what food items the player
                                                 needs to keep in the cart.
@@ -146,7 +150,7 @@
                                                 <br> The numerator of each food item indicates the
                                                 <b>current </b>quantity of that food item in your cart and the denominator indicates
                                                 the
-                                                <b>required</b> quantity needed to stay in the cart. </p>
+                                                <b>required</b> quantity needed to stay in the cart.</p>
                                         </div>
                                         <div class="col-sm-6 align-self-center">
                                             <img src="image/img_main/game2_instruct3.png">
@@ -231,7 +235,7 @@
         </div>
 
         <!-- MODAL END -->
-
+<script src="js/js_main/loginBtnCtr.js"></script>
 <script>
     var config = {
         type: Phaser.AUTO,
@@ -255,7 +259,42 @@
     };
     var game = new Phaser.Game(config);
 </script>
-
 </body>
+
+<footer class="container-fluid text-center">
+        <div class="row">
+          <div class="col-sm-12">
+            <p><b>Contact Us</b></p>
+            3700 Willingdon Ave Burnaby, BC V5G 3H2
+            <br />
+          </div>
+        </div>
+        <div class="row">
+          <br />
+          <div class="col-sm-12">
+            <a href="https://www.facebook.com/bcitfoodsavers/">
+                <i class="fab fa-facebook" id="footerIcon"></i>
+              </a>
+              <a href="https://www.instagram.com/thefoodsavers/">　
+                <i class="fab fa-instagram"></i>
+              </a>
+              <a href="https://youtu.be/ia69Ajw8-cU">　
+                <i class="fab fa-youtube"></i>
+              </a>
+              <a href="mailto:ctruong9@my.bcit.ca,joh29@my.bcit.ca,kdkim7676@gmail.com
+                  ,klo74@my.bcit.ca,99wlstjr@gmail.com">　
+                <i class="fas fa-envelope-square"></i>
+              </a>
+          </div>
+          <br />
+        </div>
+        <div class="row">
+          <div class="col-sm-12">
+            <br />
+            <p><b>Team 18</b> Chris Truong, Junho Oh, Kevin Lo, Kevin Kim, Jason Kim</p>
+            <br />
+          </div>
+        </div>
+      </footer>
 
 </html>

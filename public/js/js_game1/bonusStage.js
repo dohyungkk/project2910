@@ -26,18 +26,18 @@ var bonusStage = new Phaser.Class({
         music.play();
         potatos = this.time.addEvent({delay: 300, callback: bonusScore, callbackScope: this, repeat: 19});
         scoreText = this.add.text(16,16,'Score: ' + score, { fontSize: '32px', fill: '#000'});
-    },
-
-    update: function () {
         this.input.on('pointermove', function (pointer) {
             if(player.x>0 && player.x<400) {
             player.x=pointer.x;
             player.y=515;
             }
         });
+    },
 
-        this.physics.add.overlap(player, potatos, bonusPoints, null, this);
-        this.physics.add.overlap(platform, potatos, bonusCollission, null, this);
+    update: function () {
+        
+
+        
         if (potatoNum===0) {
             potatoStage = false;
             potatoNum=20;
@@ -52,6 +52,8 @@ function bonusScore() {
     potatos.body.gravity.y = 600;
     potatos.setScale(0.05);
     potatos.setCollideWorldBounds(true);
+    this.physics.add.overlap(player, potatos, bonusPoints, null, this);
+    this.physics.add.overlap(platform, potatos, bonusCollission, null, this);
 }
 function bonusPoints(player, potato) {
     potato.disableBody(true,true);
