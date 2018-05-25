@@ -226,9 +226,9 @@ button {
 }
 
 footer {
-	width:100%;
+	/*width:100%;*/
 	background-color: #4AA027;
-	padding: 5% 5% 10% 5%;
+	/*padding: 5% 5% 10% 5%;*/
 	color: white;
 	min-height: 25%;
 	padding-top: 10px;
@@ -250,6 +250,7 @@ footer {
 
 .fa-facebook {
 	color:#3b5998;
+	size: 50%;
 }
 
 .fa-twitter {
@@ -295,11 +296,27 @@ footer {
 		/*display: block;*/
 	}
 }
+/*
 
+p.left {
+ float: left;
+ width: 50%;
+ padding-top: 50px;
+}
 
+p.right {
+ float: right;
+ width: 40%;
+ padding-top: 
+}
 
+.fa-facebook {
+	size: 500%;
+}
 
-
+.fab {
+	font-size: 3em;
+}*/
 /*--- iOS Landing Page Fix
 section {
  	position: relative;
