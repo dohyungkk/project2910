@@ -23,7 +23,6 @@ var mainMenuScene = new Phaser.Class({
         eeSign2 = 0;
         eeSign3 = 0;
         eeSign4 = 0;
-
     },
 
     create: function() {
@@ -77,7 +76,6 @@ var mainMenuScene = new Phaser.Class({
         this.physics.add.collider(logo,invisiPlatform);
         moneyEmission.startFollow(logo);
 
-        
         //Adding buttons and logic
         var startBtn = this.add.sprite(400,400, 'startBtn').setInteractive();
         

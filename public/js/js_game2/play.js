@@ -50,8 +50,6 @@ var playScene = new Phaser.Class({
         Phaser.Scene.call(this, { key: 'playScene'});
     },
 
-    
-
     preload: function() {
         lose = 0;
         losetype = 0;
@@ -63,7 +61,6 @@ var playScene = new Phaser.Class({
         numVeggies = 0;
         numMeat = 0;
 
-        
         //Numerical value of what you need
         numDairyNeeded = 0;
         numFruitNeeded = 0;
@@ -77,7 +74,7 @@ var playScene = new Phaser.Class({
         this.add.image(400,200, 'shelf');
         this.add.image(700,500, 'list');
         
-        //Display texts
+        //Display and create texts
         scoreText = this.add.text(15,15, "Score: " + score, {
             font: '20px Arial',
             fill: '#FFFFFF'
@@ -110,8 +107,7 @@ var playScene = new Phaser.Class({
         //save a reference of this so I can use it when iterating
         reference = this;
 
-        //Making the invisble shelves
-        
+        //Making the signs to place the items back
         fruitPlatform = this.physics.add.staticGroup();
         fruitPlatform.create(125, 150, 'fruitSign');
         dairyPlatform = this.physics.add.staticGroup();
@@ -126,7 +122,6 @@ var playScene = new Phaser.Class({
         diffTimer = this.time.addEvent({delay: 60000, callback: function() {
             losetype = 0;
             gameOver(1);
-
         }, callbackScope: this, loop: true});
 
         //adds the cart
@@ -142,7 +137,6 @@ var playScene = new Phaser.Class({
         && eeSign3 == 1 && eeSign4 == 1) {
             easterEgg = this.add.sprite(100,500, 'greenBin').setScale(0.5);
         }
-
 
         var soundBtn = this.add.sprite(750, 75, 'soundOn').setInteractive();
         soundBtn.on('pointerover', function() {
@@ -178,8 +172,6 @@ var playScene = new Phaser.Class({
             diffTimer = this.time.addEvent({delay: 60000, callback: function() { //Game overif you run out of time
                 losetype = 0;
                 gameOver(1);
-
-
             }, callbackScope: this, loop: true});
             
             //delete old children (removes old items before the next level)
@@ -193,9 +185,11 @@ var playScene = new Phaser.Class({
             losetype = 1;
             gameOver(0);
         }
+		
+		//Updates the timer with how much time you have left before you lose
         diffTimeText.setText("Time Left: " + (60 - Math.floor(60 * diffTimer.getProgress())));
 
-
+		//used for the easter egg of making all the items rotate
         if(eeSign1 == 1 && eeSign2 == 1
         && eeSign3 == 1 && eeSign4 == 1) {
             easterEgg.rotation += 0.05;
@@ -203,7 +197,6 @@ var playScene = new Phaser.Class({
             Phaser.Actions.Rotate(dairy.getChildren(), 0.02);
             Phaser.Actions.Rotate(veggie.getChildren(), 0.03);
             Phaser.Actions.Rotate(meat.getChildren(), 0.04);
-            
         }    
     }
 });

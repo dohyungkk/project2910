@@ -69,7 +69,6 @@ var loadScene = new Phaser.Class({
 
         //load game files
         this.load.image('shelf', 'etc/gameShelf.png');
-        this.load.image('cart', 'etc/cart.png'); //UNNEEDED
         this.load.image('floor', '/etc/gameFloor.png');
         this.load.image('list', 'etc/list.png');
         this.load.image('cartBottom', 'etc/cartBottom.png');
@@ -79,7 +78,6 @@ var loadScene = new Phaser.Class({
         this.load.image('back', 'buttons/backBtn.png');
         this.load.image('soundOn', 'buttons/soundOn.png');
         this.load.image('soundOff', 'buttons/soundOff.png');
-        //this.load.image('smallPlatform', 'etc/smallInvis.png');
         this.load.image('cartTop', 'etc/cartTop.png');
         this.load.image('signOn', 'etc/signOn.png');
         this.load.image('fruitSign', 'etc/fruitSign.png');
@@ -93,12 +91,6 @@ var loadScene = new Phaser.Class({
         this.load.image('dairy', '/foodItems/dairy.png');
         this.load.image('meat', '/foodItems/meat.png');
         this.load.image('veggies', '/foodItems/veggie.png');
-    
-    
-    
-    
-    
-    
     },
 
     create: function() {
