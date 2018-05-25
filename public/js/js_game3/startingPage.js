@@ -1,5 +1,7 @@
 var background;
-
+var stepSound, deadSound, swordSound, telSound, damSound,
+jumpSound, healSound, wrongSound1, wrongSound2, monsDied,
+treeSound;
 var startingPage = new Phaser.Class({
     Extends: Phaser.Scene,
     
@@ -11,8 +13,7 @@ var startingPage = new Phaser.Class({
         
     preload: function ()
     {   
-        this.load.image('start', 'play.png');
-        this.load.image('tree', 'tree.png');
+        
         
         var progress = this.add.text(370,240,'Loading...', { fontSize: '50px', fill: '#000'});;
 
@@ -23,6 +24,8 @@ var startingPage = new Phaser.Class({
         });
         this.load.atlas('flares', 'flares.png', 'flares.json');
 
+        this.load.image('start', 'play.png');
+        this.load.image('tree', 'tree.png');
         this.load.spritesheet('teleport', 'tel1.png',{frameWidth: 41, frameHeight: 41, endFrame: 28});
         this.load.spritesheet('teleport5', 'tel5.png',{frameWidth: 45, frameHeight: 45, endFrame: 25});
         this.load.spritesheet('treeGrowing', 'treeG1.png',{frameWidth: 271, frameHeight: 249, endFrame: 50});
@@ -62,6 +65,23 @@ var startingPage = new Phaser.Class({
         this.load.image('enemy', 'enemy/potato.png');
 
         this.load.image('spark', 'blue.png');
+
+        this.load.audio('damageEffect', 'music/damaged.mp3');
+        this.load.audio('deadEffect', 'music/dead.mp3');
+        this.load.audio('jumpEffect', 'music/jump.mp3');
+        this.load.audio('swordEffect', 'music/slash.mp3');
+        this.load.audio('telEffect', 'music/teleport.mp3');
+        this.load.audio('healEffect', 'music/healsound.mp3');
+        this.load.audio('telEffect', 'music/teleport.mp3');
+        this.load.audio('healEffect', 'music/healsound.mp3');
+        this.load.audio('wrongEffect1', 'music/Aww.mp3');
+        this.load.audio('wrongEffect2', 'music/torture.mp3');
+        this.load.audio('monDieEffect', 'music/monsterDied.mp3');
+        this.load.audio('treeDamage', 'music/treeDamage.mp3');
+        this.load.audio('sakuraBack', 'music/sakuraMusic.mp3');
+        this.load.audio('winterBack', 'music/winterMusic.mp3');
+        this.load.audio('sunsetBack', 'music/sunsetMusic.mp3');
+
     },
     create: function() {
         background = this.scene.launch("spring");
@@ -70,9 +90,23 @@ var startingPage = new Phaser.Class({
         menu.setScale(0.25);
         menu.on('pointerdown', function() {
             background.pause();
+            springMusic.pause();
             this.scene.pause('spring');
-            this.scene.launch('christmas')
+            this.scene.launch('christmas');
             this.scene.start('gameStart');
         },this);
+        var loopMarker = {
+            name: 'loop',
+            start: 0,
+            duration: 100,
+            config: {
+                loop: true
+            }
+        };
+        springMusic = this.sound.add('springBack')
+        springMusic.addMarker(loopMarker);
+        springMusic.play('loop', {
+            delay: 0
+        });
     }
 });

@@ -70,38 +70,43 @@ var gameStart = new Phaser.Class({
             key: 'growingTree1',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 0, end: 10, first: 0}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
         });
         this.anims.create({
             key: 'growingTree2',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 10, end: 27, first: 10}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
         });
         this.anims.create({
             key: 'growingTree3',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 28, end: 49, first: 28}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
         });
 
         this.anims.create({
             key: 'reverseTree1',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 10, end: 0, first: 10}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
         });
         this.anims.create({
             key: 'reverseTree2',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 27, end: 10, first: 27}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
         });
         this.anims.create({
             key: 'reverseTree3',
             frames: this.anims.generateFrameNames('treeGrowing', {start: 49, end: 28, first: 49}),
             frameRate: 20,
-            repeat: 0,
+            repeat: 0
+        });
+        this.anims.create({
+            key: 'treeOver',
+            frames: this.anims.generateFrameNames('treeGrowing', {start: 49, end: 49, first: 49}),
+            repeat: 0
         });
 
         this.anims.create({
@@ -162,12 +167,34 @@ var gameStart = new Phaser.Class({
             frameRate: 25,
             repeat: 0
         });
-        
 
         
+
+        deadSound = this.sound.add('deadEffect');
+
+        // swordSounding = this.sound.add('swordEffect');
+        // swordSounding.addMarker(loopMarker);
+        
+        swordSound = this.sound.add('swordEffect');
+        
+        healSound = this.sound.add('healEffect');
+        telSound = this.sound.add('telEffect');
+        telSound.volume = 5;
+
+        damSound = this.sound.add('damageEffect');
+
+        jumpSound = this.sound.add('jumpEffect');
+
+        wrongSound1 = this.sound.add('wrongEffect1');
+        wrongSound2 = this.sound.add('wrongEffect2');
+
+        monsDied = this.sound.add('monDieEffect');
+        monsDied.volume = 0.5;
+        treeSound = this.sound.add('treeDamage');
     }
 });
 function positive(crystal, heart) {
+
     heart.disableBody(true, true);
     combo++;
     score += 10;
@@ -182,16 +209,23 @@ function positive(crystal, heart) {
             switch(treeGrowing) {
                 case 1:
                     bonusHP();
+                    music.pause();
                     this.scene.stop('christmas');
+                    springMusic.resume();
+                    // this.scene.launch('spring');
                     tree.anims.play('growingTree1');
                     break;
                 case 2:
                     bonusHP();
+                    // this.scene.stop('spring');
+                    springMusic.pause();
+                    music.pause();
                     this.scene.launch('sunset');
                     tree.anims.play('growingTree2');
                     break;
                 case 3:
                     bonusHP();
+                    music.pause();
                     this.scene.stop('sunset');
                     this.scene.launch('sakura');
                     tree.anims.play('growingTree3');
@@ -219,13 +253,13 @@ function positive(crystal, heart) {
 
 function increment() {
     ran = Math.round(Math.random());
-            switch(ran) {
-                    case 0:
-                    xPosition = -50;
-                     break;
-                 case 1:
-                     xPosition = 1100;
-                    break;
+    switch(ran) {
+        case 0:
+            xPosition = -50;
+             break;
+        case 1:
+             xPosition = 1100;
+            break;
     }
     hearts = this.physics.add.sprite(xPosition, 555, 'heart');
     hearts.setScale(0.06);
@@ -244,13 +278,13 @@ function sorting(heart, mons) {
 }
 function summon() {
     ran = Math.round(Math.random());
-            switch(ran) {
-                    case 0:
-                    xPosition = -50;
-                     break;
-                 case 1:
-                     xPosition = 1100;
-                    break;
+    switch(ran) {
+        case 0:
+            xPosition = -50;
+             break;
+         case 1:
+             xPosition = 1100;
+            break;
     }
     monsters = this.physics.add.sprite(xPosition, 555, 'monster').setScale(0.7);
     if (ran == 1) {
@@ -268,6 +302,15 @@ function summon() {
     
 function wrongAttack(slash, heart) {
     if (slash.visible) {
+        ran = Math.round(Math.random());
+        switch(ran) {
+            case 0:
+                wrongSound1.play();
+                break;
+            case 1:
+                wrongSound2.play()
+                break;
+        }
         heart.disableBody(true, true);
         hpProgress();
         comboText.visible = false;
@@ -276,7 +319,9 @@ function wrongAttack(slash, heart) {
         scoreText.setText('Score: ' + score);
     }
 }
+
 function negative(crystal, monster) {
+    treeSound.play();
     monster.disableBody(true, true);
     tree.setTint(0xff0000);
     timedEvent = this.time.addEvent({ delay: 135, callback: clearT, callbackScope: this, loop: 0 });
@@ -288,15 +333,20 @@ function negative(crystal, monster) {
         switch(treeGrowing) {
             case 1:
                 // this.scene.stop('spring');
+                music.pause();
+                springMusic.pause();
                 this.scene.launch('christmas');
                 tree.anims.play('reverseTree1');
                 break;
             case 2:
                 this.scene.stop('sunset');
+                music.pause();
+                springMusic.resume();
                 // this.scene.launch('spring');
                 tree.anims.play('reverseTree2');
                 break;
             case 3:
+                music.pause();
                 this.scene.stop('sakura');
                 this.scene.launch('sunset');
                 tree.anims.play('reverseTree3');
@@ -322,8 +372,9 @@ function hpProgress() {
 }
 function bonusHP() {
     hpPoint++;
+    healSound.play();
     heal.x = player.x;
-    heal.y = player.y+20;
+    heal.y = player.y-3;
     heal.anims.play('healing');
     hp.children.iterate(function (child) {
             child.disableBody(true, true);
@@ -336,6 +387,7 @@ function bonusHP() {
     }
 }
 function damaged(wall, monster) {
+    damSound.play();
     monster.disableBody(true, true);
     player.setTint(0xff0000);
     timedEvent = this.time.addEvent({ delay: 135, callback: clearC, callbackScope: this, loop: 0 });
@@ -353,6 +405,7 @@ function clearT() {
 }
 function attack(slash, mons) {
     if (slash.visible) {
+        monsDied.play();
         mons.disableBody(true, true);
         combo++;   
         score += 5;

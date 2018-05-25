@@ -16,8 +16,11 @@ var christmas = new Phaser.Class({
         this.load.image('mCircle4', 'mcircle2/mCircle1.png');
         this.load.image('mCircle3', 'mcircle1/mCircle4.png');
         this.load.image('winter', 'back2/grass4.png');
+
+        
     },
     create: function() {
+        music.pause();
         this.add.image(500,305, 'snowsky').setScale(0.9);
         this.add.image(500,350, 'snow').setScale(0.7);
 
@@ -98,6 +101,19 @@ var christmas = new Phaser.Class({
             scale: 0.4,
             blendMode: 'ADD',
             emitZone: { type: 'edge', source: baubles2, quantity: 16 }
+        });
+        var loopMarker = {
+            name: 'loop',
+            start: 0,
+            duration: 100,
+            config: {
+                loop: true
+            }
+        };
+        music = this.sound.add('winterBack');
+        music.addMarker(loopMarker);
+        music.play('loop', {
+            delay: 0
         });
         
     }

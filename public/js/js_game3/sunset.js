@@ -17,6 +17,7 @@ var sunset = new Phaser.Class({
         this.load.image('mCircle7', 'mcircle1/mCircle6.png');
     },
     create: function() {
+        music.pause();
         this.add.image(500,225, 'sky1').setScale(1.3);
         for (var i = 0; i < 77; i++)
         {
@@ -52,6 +53,19 @@ var sunset = new Phaser.Class({
             scale: { start: 0.2, end: 0.1 },
             frequency: 32,
             blendMode: 'ADD'
+        });
+        var loopMarker = {
+            name: 'loop',
+            start: 0,
+            duration: 100,
+            config: {
+                loop: true
+            }
+        };
+        music = this.sound.add('sunsetBack');
+        music.addMarker(loopMarker);
+        music.play('loop', {
+            delay: 0
         });
         
     },
